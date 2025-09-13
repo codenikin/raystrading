@@ -31,7 +31,7 @@ const HeroSection: React.FC<HeroSectionProps> = () => {
 
               <p className="text-xl md:text-2xl text-gray-300 mb-4 font-anton">
                 we’re your trusted partner for reliable power solutions. With unmatched prices,
-                genuine products, and professional service, Rayas Trading is the name customers
+                genuine products, and professional service, Rays Trading is the name customers
                 across Hosur count on.
               </p>
 

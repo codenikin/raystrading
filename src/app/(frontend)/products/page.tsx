@@ -69,7 +69,7 @@ export default async function prodcuts() {
           />
           <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/40">
             <h1 className="text-white p-8 md:p-0 mt-8 font-bold drop-shadow-lg animate-bounce">
-              <span className="text-white font-anton text-5xl md:text-7xl">RAYAS</span>
+              <span className="text-white font-anton text-5xl md:text-7xl">RAYS</span>
               <span className="text-red-500 font-anton text-5xl md:text-7xl"> TRADING HOSUR</span>
             </h1>
             <p className="text-xl  text-white/90 p-8 md:pd-0">
@@ -171,10 +171,10 @@ export default async function prodcuts() {
             <div className="container mx-auto px-6">
               <div className="flex flex-col items-center justify-center mb-12 text-center">
                 <h2 className="text-3xl md:text-4xl font-bold mb-6 text-black max-w-3xl">
-                  Why Choose Rayas Trading for Your Battery Needs in Hosur?
+                  Why Choose Rays Trading for Your Battery Needs in Hosur?
                 </h2>
                 <p className="text-lg text-gray-700 max-w-3xl">
-                  At Rayas Trading, we are more than just a battery shop – we are your trusted
+                  At Rays Trading, we are more than just a battery shop – we are your trusted
                   partner for battery sales, installation, and after-sales support in Hosur. Here’s
                   why customers choose us
                 </p>
@@ -260,7 +260,7 @@ export default async function prodcuts() {
                   Ready to replace your battery?
                 </h2>
                 <p className="text-xl mb-8 text-white/90">
-                  Contact Rayas Trading today for the best rates on Exide & Amaron batteries in
+                  Contact Rays Trading today for the best rates on Exide & Amaron batteries in
                   Hosur!”
                 </p>
                 <div className="flex flex-col sm:flex-row justify-center gap-4">

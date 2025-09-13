@@ -71,9 +71,9 @@ const features: Feature[] = [
 const faqData = [
   {
     id: 1,
-    question: 'How long has Rayas Trading been in the battery business?',
+    question: 'How long has Rays Trading been in the battery business?',
     answer:
-      'Rayas Trading has been serving Hosur and Bangalore for over 10 years, providing reliable battery sales, installation, and after-sales support for homes, vehicles, and businesses.',
+      'Rays Trading has been serving Hosur and Bangalore for over 10 years, providing reliable battery sales, installation, and after-sales support for homes, vehicles, and businesses.',
   },
   {
     id: 2,
@@ -279,17 +279,16 @@ export const AboutPage: React.FC = ({}) => {
               </h2>
 
               <h3 className="text-3xl font-semibold text-gray-800 mb-6 " id="about-title">
-                Buy Inverter Batteries in Hosur | Rayas Trading – Free Delivery & Expert
-                Installation
+                Buy Inverter Batteries in Hosur | Rays Trading – Free Delivery & Expert Installation
               </h3>
 
               <p className="text-gray-600 leading-relaxed mb-6 " id="about-p1">
-                Buy reliable inverter batteries from Rayas Trading, one of the leading battery
+                Buy reliable inverter batteries from Rays Trading, one of the leading battery
                 distributors in Hosur. We offer top brands like Amaron and Exide at the best prices,
                 ensuring long backup and durability for your home or business. Enjoy free doorstep
                 delivery, cash on delivery, and professional installation by qualified technicians.
                 With our quick replacement service and genuine warranty support, you can stay
-                powered without worries. Choose Rayas Trading for trusted service and unbeatable
+                powered without worries. Choose Rays Trading for trusted service and unbeatable
                 value in inverter batteries.
               </p>
 
