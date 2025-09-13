@@ -4,7 +4,6 @@ import type { Product } from '@/payload-types'
 import { draftMode } from 'next/headers'
 import { Metadata } from 'next'
 import Link from 'next/link'
-
 import Image from 'next/image'
 import Script from 'next/script'
 import ProductImageSection from '@/components/ProductImageSection'

@@ -74,11 +74,11 @@ export default async function HomePage() {
   const exideSubcategory = (
     await payload.find({
       collection: 'subcategories',
-      // where: {
-      //   slug: {
-      //     equals: 'exide',
-      //   },
-      // },
+      where: {
+        slug: {
+          equals: 'exide',
+        },
+      },
     })
   ).docs[0]
   const products = exideSubcategory

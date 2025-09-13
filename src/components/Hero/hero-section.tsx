@@ -24,7 +24,7 @@ const HeroSection: React.FC<HeroSectionProps> = () => {
             >
               <h1 className="text-5xl md:text-7xl font-anton text-white mb-4 tracking-wide leading-tight">
                 We are more than
-                <span className="text-red-600 block !font-anton tracking-wide font-extrabold">
+                <span className="text-red-600 block font-anton tracking-wide font-extrabold">
                   just a battery shop
                 </span>
               </h1>

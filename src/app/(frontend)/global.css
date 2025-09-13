@@ -5,3 +5,7 @@
     --radius: 0.5rem;
   }
 }
+.font-anton {
+  font-family: var(--font-anton), system-ui, sans-serif;
+  font-weight: 400;
+}
