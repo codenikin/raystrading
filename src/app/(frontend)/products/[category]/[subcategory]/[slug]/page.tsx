@@ -112,7 +112,7 @@ export default async function Product({ params }: { params: Promise<Args> }) {
       <div className="pt-[80px] min-h-screen flex flex-col bg-white">
         <div className="relative w-full h-[320px] md:h-[420px]">
           <Image
-            src="/images/dahuactct.jpg"
+            src="/images/bg.jpg"
             alt="Dahua Solutions Banner"
             fill
             className="object-cover w-full h-full"
