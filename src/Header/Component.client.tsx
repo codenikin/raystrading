@@ -34,19 +34,6 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({
     setIsClient(true)
   }, [])
 
-  const logoUrl = React.useMemo(() => {
-    if (logoError || !logo?.url) return '/images/dahualogo-removebg-preview.png'
-    if (logo.url.startsWith('http')) {
-      return logo.url
-    }
-    const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL || ''
-    return `${serverUrl}${logo.url}`
-  }, [logo?.url, logoError])
-
-  const handleLogoError = useCallback(() => {
-    console.log('Logo failed to load, switching to fallback')
-    setLogoError(true)
-  }, [])
   useEffect(() => {
     if (!isClient) return
 
@@ -147,13 +134,12 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({
               {/* Logo on the right */}
               <Link href="/" style={{ display: 'block' }}>
                 <Image
-                  src={logoUrl}
+                  src={logo.url!}
                   alt={logo?.alt || 'Site Logo'}
                   width={100}
                   height={30}
                   priority
                   className="object-contain"
-                  onError={handleLogoError}
                 />
               </Link>
             </div>
@@ -164,7 +150,7 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({
             >
               <Link href="/" style={{ display: 'block' }}>
                 <Image
-                  src={logoUrl}
+                  src={logo.url!}
                   alt={logo?.alt || 'Site Logo'}
                   width={140}
                   height={40}
@@ -173,7 +159,6 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({
                   style={{
                     filter: 'brightness(1.2) contrast(1.1)',
                   }}
-                  onError={handleLogoError}
                 />
               </Link>
             </div>

@@ -12,7 +12,6 @@ export async function Header() {
   const telephone = settings.Telephone
   const favicon = settings.favicon as Media
   const email = settings.Email
-
   return (
     <HeaderClient
       headerdata={header1}
