@@ -21,6 +21,7 @@ COPY --from=builder /app/.next/standalone/ .
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/.next/static .next/static
 
-EXPOSE 3002
+EXPOSE 3000
+EXPOSE 3333
 
 CMD HOSTNAME="0.0.0.0" node server.js
