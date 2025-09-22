@@ -50,9 +50,8 @@ export async function generateMetadata({
     },
     openGraph: {
       title: product.title,
-
       description: product?.meta?.description ?? '',
-      siteName: 'https://totalengg.in',
+      siteName: 'https://raystrading.com',
 
       locale: 'en_US',
       type: 'website',
@@ -120,12 +119,12 @@ export default async function Product({ params }: { params: Promise<Args> }) {
           />
           <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/40">
             <h1 className="text-white text-4xl md:text-5xl font-bold drop-shadow-lg">
-              <span className="text-white">Dahua</span>
-              <span className="text-red-500"> Products</span>
+              <span className="text-white">Rays</span>
+              <span className="text-red-500"> Trading</span>
             </h1>
             <p className="text-xl max-w-3xl text-white/90">
-              Discover our comprehensive range of security products designed to meet all your
-              surveillance and safety needs.
+              Trusted Exide battery distributor, Rays Trading delivers reliable power solutions for
+              cars, inverters & industries. Quality you can count on.
             </p>
           </div>
         </div>
@@ -183,36 +182,7 @@ export default async function Product({ params }: { params: Promise<Args> }) {
                             {product.description}
                           </p>
 
-                          {/* Product Options */}
                           <div className="space-y-6 mb-6">
-                            {/* Color Options */}
-                            {/* <div>
-                              <h3 className="text-sm font-medium text-gray-900 mb-4">Color</h3>
-                              <div className="flex items-center space-x-3">
-                                {['White', 'Black', 'Gray'].map((color) => (
-                                  <label key={color} className="relative">
-                                    <input
-                                      type="radio"
-                                      name="color"
-                                      value={color}
-                                      className="peer sr-only"
-                                    />
-                                    <div
-                                      className="peer-checked:border-red-600 peer-checked:border-2 w-8 h-8 rounded-full border border-gray-300 cursor-pointer transition-all hover:border-red-600"
-                                      style={{
-                                        backgroundColor: color.toLowerCase(),
-                                        border:
-                                          color.toLowerCase() === 'white'
-                                            ? '1px solid #e5e7eb'
-                                            : 'none',
-                                      }}
-                                    ></div>
-                                  </label>
-                                ))}
-                              </div>
-                            </div> */}
-
-                            {/* Storage Options */}
                             <div>
                               <h3 className="text-sm font-medium text-gray-900 mb-4">
                                 Battery Capacity
