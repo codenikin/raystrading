@@ -3,13 +3,38 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: payload-cms
+    container_name: rays
     volumes:
-      - ./media:/app/media
+      - ./public/media:/app/public/media
     ports:
-      - "3002:3002"
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
-    env_file:
-      - ".env"
+      - "3331:3002"
+    depends_on:
+      - db
     restart: unless-stopped
+    environment:
+      - PAYLOAD_SECRET=secret
+      - DATABASE_URL=postgresql://rays:secret@db/raysdb
+      - NEXT_PUBLIC_SERVER_URL https://raystrading.com
+      - NEXT_PUBLIC_ORG_NAME Raystrading
+    networks:
+      - default-net
+
+  db:
+    image: docker.io/library/postgres:latest
+    environment:
+      - POSTGRES_USER=rays
+      - POSTGRES_PASSWORD=secret
+      - POSTGRES_DB=raysdb
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - default-net
+volumes:
+  postgres-data:
+
+
+networks:
+  default-net:
+    driver: bridge
