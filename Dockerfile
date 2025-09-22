@@ -4,7 +4,7 @@ RUN npm i -g pnpm
 
 WORKDIR /app
 
-COPY package.json pnpm-lock.yaml 
+COPY package.json pnpm-lock.yaml ./
 
 RUN pnpm install --frozen-lockfile
 ENV DATABASE_URL postgresql://rays:secret@db/raysdb
