@@ -1,9 +1,26 @@
-FROM node:18-alpine AS base
+FROM node:24-alpine AS builder
+
+RUN npm i -g pnpm
+
 WORKDIR /app
-COPY package*.json ./
-COPY pnpm-lock.yaml ./
-RUN npm install -g pnpm && pnpm install
+
+COPY package.json pnpm-lock.yaml 
+
+RUN pnpm install --frozen-lockfile
+ENV DATABASE_URL postgresql://codenik:secret@db/codenikdb
+ENV NEXT_PUBLIC_SERVER_URL https://rays
+ENV NEXT_PUBLIC_ORG_NAME Codenik
+ENV PAYLOAD_SECRET secret
+
 COPY . .
 RUN pnpm build
-EXPOSE 3002
-CMD ["pnpm", "start"]
+
+FROM node:24-alpine AS prod
+WORKDIR /app
+COPY --from=builder /app/.next/standalone/ .
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/.next/static .next/static
+
+EXPOSE 3000
+
+CMD HOSTNAME="0.0.0.0" node server.js
