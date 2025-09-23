@@ -3,7 +3,7 @@ import configPromise from '@payload-config'
 
 let cachedPayload: Payload | null = null
 
-export const getPayload = async (): Promise<Payload> => {
+export const getPayload = async (p0: unknown): Promise<Payload> => {
   if (cachedPayload) {
     return cachedPayload
   }

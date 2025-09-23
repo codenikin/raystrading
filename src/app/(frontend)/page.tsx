@@ -37,9 +37,9 @@ export async function generateMetadata(): Promise<Metadata> {
       url: settings.slug ?? '',
       siteName: settings.meta?.title || 'My Site',
       alternateLocale: '',
-      countryName: 'U.A.E',
-      phoneNumbers: '+971503308608',
-      emails: 'sales@unvdubai.com',
+      countryName: 'INDIA',
+      phoneNumbers: '+919442532024',
+      emails: 'yogeshna3@gmail.com',
       images: [
         {
           url: ogImageUrl?.sizes?.ogImage?.url ?? '',
@@ -106,9 +106,12 @@ export default async function HomePage() {
   ).docs
   return (
     <>
-      <Script id="product-schema-markup" type="application/ld+json" strategy="beforeInteractive">
-        {JSON.stringify(HomePage?.schemaMarkup)}
-      </Script>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(HomePage?.schemaMarkup),
+        }}
+      />
       <div className="relative w-full overflow-hidden">
         <HeroSection homepage={HomePage} />
         <SlidingTextBackground />

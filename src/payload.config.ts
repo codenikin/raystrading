@@ -11,7 +11,9 @@ import { Subcategories } from './collections/Subcategories'
 import { HomePage } from './collections/homepage'
 import { Media } from './collections/Media'
 import { Products } from './collections/Products'
-import { Product as ProductsType } from './payload-types'
+// Update the import below to match the actual exported type from './payload-types'
+import type { Product as ProductsType } from './payload-types'
+import { AboutPage } from './collections/AboutPage'
 import sharp from 'sharp'
 import { Users } from './collections/Users'
 import { SiteSettings } from './globals/Settings/config'
@@ -39,6 +41,7 @@ export default buildConfig({
     ContactPage,
     Forms,
     FormSubmissions,
+    AboutPage,
   ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',

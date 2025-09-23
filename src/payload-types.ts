@@ -76,6 +76,7 @@ export interface Config {
     contactpage: Contactpage;
     forms: Form;
     'form-submissions': FormSubmission;
+    'about-page': AboutPage;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -91,6 +92,7 @@ export interface Config {
     contactpage: ContactpageSelect<false> | ContactpageSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
     'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
+    'about-page': AboutPageSelect<false> | AboutPageSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -413,7 +415,6 @@ export interface Contactpage {
     postalCode?: string | null;
     country?: string | null;
   };
-  slug: string;
   schemaMarkup?:
     | {
         [k: string]: unknown;
@@ -423,6 +424,16 @@ export interface Contactpage {
     | number
     | boolean
     | null;
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (number | null) | Media;
+    description?: string | null;
+  };
+  slug?: string | null;
+  slugLock?: boolean | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -494,6 +505,45 @@ export interface FormSubmission {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "about-page".
+ */
+export interface AboutPage {
+  id: number;
+  title: string;
+  description: string;
+  vision: {
+    title: string;
+    description: string;
+  };
+  FaqSection?:
+    | {
+        question: string;
+        answer: string;
+        id?: string | null;
+      }[]
+    | null;
+  schemaMarkup?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (number | null) | Media;
+    description?: string | null;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -534,6 +584,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'form-submissions';
         value: number | FormSubmission;
+      } | null)
+    | ({
+        relationTo: 'about-page';
+        value: number | AboutPage;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -759,8 +813,16 @@ export interface ContactpageSelect<T extends boolean = true> {
         postalCode?: T;
         country?: T;
       };
-  slug?: T;
   schemaMarkup?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        image?: T;
+        description?: T;
+      };
+  slug?: T;
+  slugLock?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -804,6 +866,37 @@ export interface FormSubmissionsSelect<T extends boolean = true> {
   phone?: T;
   submittedAt?: T;
   status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "about-page_select".
+ */
+export interface AboutPageSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  vision?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+      };
+  FaqSection?:
+    | T
+    | {
+        question?: T;
+        answer?: T;
+        id?: T;
+      };
+  schemaMarkup?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        image?: T;
+        description?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
 }

@@ -1,4 +1,12 @@
 import type { CollectionConfig } from 'payload'
+import {
+  MetaDescriptionField,
+  MetaImageField,
+  MetaTitleField,
+  OverviewField,
+  PreviewField,
+} from '@payloadcms/plugin-seo/fields'
+import { slugField } from '@/fields/slug'
 export const ContactPage: CollectionConfig = {
   slug: 'contactpage',
 
@@ -62,12 +70,6 @@ export const ContactPage: CollectionConfig = {
         },
       ],
     },
-    {
-      name: 'slug',
-      type: 'text',
-      required: true,
-      unique: true,
-    },
 
     {
       name: 'schemaMarkup',
@@ -76,6 +78,38 @@ export const ContactPage: CollectionConfig = {
         readOnly: true,
       },
     },
+    {
+      type: 'tabs',
+      tabs: [
+        {
+          name: 'meta',
+          label: 'SEO',
+          fields: [
+            OverviewField({
+              titlePath: 'meta.title',
+              descriptionPath: 'meta.description',
+              imagePath: 'meta.image',
+            }),
+            MetaTitleField({
+              hasGenerateFn: true,
+            }),
+            MetaImageField({
+              relationTo: 'media',
+            }),
+            MetaDescriptionField({}),
+            PreviewField({
+              // if the `generateUrl` function is configured
+              hasGenerateFn: true,
+
+              // field paths to match the target field for data
+              titlePath: 'meta.title',
+              descriptionPath: 'meta.description',
+            }),
+          ],
+        },
+      ],
+    },
+    ...slugField(),
   ],
   hooks: {
     afterChange: [
@@ -85,14 +119,14 @@ export const ContactPage: CollectionConfig = {
             '@context': 'https://schema.org',
             '@type': 'Organization',
             name: doc.title,
-            url: '${process.env.NEXT_PUBLIC_SERVER_URL}',
-            logo: '',
+            url: 'https://raystrading.com',
+            logo: 'https://raystrading.com/images/roundlogowhite.jpg',
             contactPoint: {
               '@type': 'ContactPoint',
               telephone: doc.Telephone,
               contactType: 'customer service',
-              areaServed: 'AE',
-              availableLanguage: ['English', 'Arabic'],
+              areaServed: 'IN',
+              availableLanguage: ['English', 'Hindi'],
             },
             address: {
               '@type': 'PostalAddress',
@@ -103,19 +137,11 @@ export const ContactPage: CollectionConfig = {
               addressCountry: doc.address?.country,
             },
             sameAs: [
-              'https://www.facebook.com/unvdubai',
-              'ps://www.instagram.com/unvdubai',
-              'ttps://www.linkedin.com/company/unvdubai',
+              'https://www.facebook.com',
+              'https://www.instagram.com',
+              'ttps://www.linkedin.com/company',
             ],
           }
-
-          req.payload.update({
-            collection: 'contactpage',
-            id: doc.id,
-            data: {
-              schemaMarkup: schema,
-            },
-          })
           doc.schemaMarkup = schema
           return doc
         }

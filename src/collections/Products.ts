@@ -166,7 +166,7 @@ export const Products: CollectionConfig = {
               itemCondition: 'https://schema.org/NewCondition',
               seller: {
                 '@type': 'Organization',
-                name: 'Your Company',
+                name: 'Rays Trading',
               },
             },
           }

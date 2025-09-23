@@ -125,7 +125,7 @@ export const HomePage: CollectionConfig = {
             '@graph': [
               {
                 '@type': 'WebSite',
-                '@id': '${process.env.NEXT_PUBLIC_SERVER_URL}/#website',
+                '@id': 'https://raystrading.com/#website',
                 url: 'https://raystrading.com/',
                 name: 'Rays Trading',
                 description: doc.description,
@@ -137,9 +137,9 @@ export const HomePage: CollectionConfig = {
               },
               {
                 '@type': 'Organization',
-                '@id': '${process.env.NEXT_PUBLIC_SERVER_URL}/#organization',
+                '@id': 'https://raystrading.com/#organization',
                 name: 'Rays Trading',
-                url: '${process.env.NEXT_PUBLIC_SERVER_URL}',
+                url: 'https://raystrading.com',
                 brand:
                   doc.brands?.map(
                     (brand: {
