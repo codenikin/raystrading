@@ -11,6 +11,5 @@ export default async function ContactPage() {
     depth: 2,
   })
   const homepage: Homepage | undefined = homepageres.docs?.[0]
-
   return <HeroSection homepage={homepage} />
 }

@@ -76,23 +76,6 @@ const HeroSection: React.FC<HeroSectionProps> = () => {
           </div>
         </div>
       </div>
-      {/* 
-      <motion.div
-        className="absolute bottom-0 left-1/2 -translate-x-1/2 z-20 "
-        animate={{
-          y: [0, -10, 0],
-          opacity: [0.7, 1, 0.7],
-        }}
-        transition={{
-          duration: 2,
-          repeat: Infinity,
-          repeatType: 'loop',
-        }}
-      >
-        <div className="w-8 h-12 border-2 border-white rounded-full flex items-start justify-center p-1">
-          <div className="w-1 h-2 bg-white rounded-full"></div>
-        </div>
-      </motion.div> */}
     </section>
   )
 }

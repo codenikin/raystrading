@@ -126,19 +126,19 @@ export const HomePage: CollectionConfig = {
               {
                 '@type': 'WebSite',
                 '@id': '${process.env.NEXT_PUBLIC_SERVER_URL}/#website',
-                url: 'https://unv-dubai-uae.com',
-                name: 'UNV Dubai UAE',
-                description: 'Leading provider of advanced security solutions in Dubai, UAE.',
+                url: 'https://raystrading.com/',
+                name: 'Rays Trading',
+                description: doc.description,
                 potentialAction: {
                   '@type': 'SearchAction',
-                  target: 'https://unv-dubai-uae.com/search?q={search_term_string}',
+                  target: 'https://raystrading.com/search?q={search_term_string}',
                   'query-input': 'required name=search_term_string',
                 },
               },
               {
                 '@type': 'Organization',
                 '@id': '${process.env.NEXT_PUBLIC_SERVER_URL}/#organization',
-                name: 'UNV Dubai UAE',
+                name: 'Rays Trading',
                 url: '${process.env.NEXT_PUBLIC_SERVER_URL}',
                 brand:
                   doc.brands?.map(
@@ -158,62 +158,54 @@ export const HomePage: CollectionConfig = {
               },
               {
                 '@type': 'Organization',
-                '@id': 'https://unv-dubai-uae.com/#organization',
-                name: 'UNV Dubai UAE',
-                url: 'https://unv-dubai-uae.com',
+                '@id': 'https://raystrading.com/#organization',
+                name: 'Rays Trading',
+                url: 'https://raystrading.com',
                 logo: {
                   '@type': 'ImageObject',
-                  url: 'https://unv-dubai-uae.com/logo.png',
+                  url: 'https://raystrading.com/images/rayslogo.png',
                 },
                 contactPoint: {
                   '@type': 'ContactPoint',
-                  telephone: '+971-123-4567',
+                  telephone: '+919442532024',
                   contactType: 'customer service',
-                  areaServed: 'AE',
-                  availableLanguage: ['English', 'Arabic'],
+                  areaServed: 'IN',
+                  availableLanguage: ['English', 'Hindi'],
                 },
                 sameAs: [
-                  'https://www.facebook.com/unvdubai',
-                  'https://www.instagram.com/unvdubai',
-                  'https://www.linkedin.com/company/unvdubai',
+                  'https://www.facebook.com/raystrading',
+                  'https://www.instagram.com/raystrading',
+                  'https://www.linkedin.com/company/raystrading',
                 ],
               },
               {
                 '@type': 'WebPage',
-                '@id': 'https://unv-dubai-uae.com/#webpage',
-                url: 'https://unv-dubai-uae.com',
+                '@id': 'https://raystrading.com/#webpage',
+                url: 'https://raystrading.com',
                 inLanguage: 'en',
                 name: 'Home',
-                description: 'Next-gen security solutions for homes and businesses in Dubai.',
+                description: doc.description,
                 isPartOf: {
-                  '@id': 'https://unv-dubai-uae.com/#website',
+                  '@id': 'https://raystrading.com/#website',
                 },
                 about: {
-                  '@id': 'https://unv-dubai-uae.com/#organization',
+                  '@id': 'https://raystrading.com/#organization',
                 },
               },
               {
                 '@type': 'BreadcrumbList',
-                '@id': 'https://unv-dubai-uae.com/#breadcrumb',
+                '@id': 'https://raystrading.com/#breadcrumb',
                 itemListElement: [
                   {
                     '@type': 'ListItem',
                     position: 1,
                     name: 'Home',
-                    item: 'https://unv-dubai-uae.com',
+                    item: 'https://raystrading.com',
                   },
                 ],
               },
             ],
           }
-
-          // req.payload.update({
-          //   collection: 'homepage',
-          //   id: doc.id,
-          //   data: {
-          //     schemaMarkup: schema,
-          //   },
-          // })
           doc.schemaMarkup = schema
           return doc
         }
