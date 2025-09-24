@@ -115,33 +115,37 @@ export const ContactPage: CollectionConfig = {
   ],
   hooks: {
     afterChange: [
-      async ({ doc, operation, req }) => {
+      async ({ doc, operation }) => {
         if (operation === 'create' || operation === 'update') {
           const schema = {
             '@context': 'https://schema.org',
-            '@type': 'Organization',
-            name: doc.title,
-            url: 'https://raystrading.com',
-            logo: 'https://raystrading.com/images/roundlogowhite.jpg',
-            contactPoint: {
-              '@type': 'ContactPoint',
-              telephone: doc.Telephone,
-              contactType: 'customer service',
-              areaServed: 'IN',
-              availableLanguage: ['English', 'Hindi'],
-            },
-            address: {
-              '@type': 'PostalAddress',
-              streetAddress: doc.address?.street,
-              addressLocality: doc.address?.city,
-              addressRegion: doc.address?.state,
-              postalCode: doc.address?.postalCode,
-              addressCountry: doc.address?.country,
-            },
-            sameAs: [
-              'https://www.facebook.com',
-              'https://www.instagram.com',
-              'ttps://www.linkedin.com/company',
+            '@graph': [
+              {
+                '@type': 'Organization',
+                name: doc.title,
+                url: 'https://raystrading.com',
+                logo: 'https://raystrading.com/images/roundlogowhite.jpg',
+                contactPoint: {
+                  '@type': 'ContactPoint',
+                  telephone: doc.Telephone,
+                  contactType: 'customer service',
+                  areaServed: 'IN',
+                  availableLanguage: ['English', 'Hindi'],
+                },
+                address: {
+                  '@type': 'PostalAddress',
+                  streetAddress: doc.address?.street,
+                  addressLocality: doc.address?.city,
+                  addressRegion: doc.address?.state,
+                  postalCode: doc.address?.postalCode,
+                  addressCountry: doc.address?.country,
+                },
+                sameAs: [
+                  'https://www.facebook.com',
+                  'https://www.instagram.com',
+                  'ttps://www.linkedin.com/company',
+                ],
+              },
             ],
           }
           doc.schemaMarkup = schema

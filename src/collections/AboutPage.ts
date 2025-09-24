@@ -106,26 +106,30 @@ export const AboutPage: CollectionConfig = {
   ],
   hooks: {
     afterChange: [
-      async ({ doc, operation, req }) => {
+      async ({ doc, operation }) => {
         if (operation === 'create' || operation === 'update') {
           const schema = {
             '@context': 'https://schema.org',
-            '@type': 'AboutPage',
-            mainEntity: {
-              '@type': 'Organization',
-              name: 'Rays trading',
-              url: 'https://www.yourcompany.com',
-              logo: 'https://www.yourcompany.com/logo.png',
+            '@graph': [
+              {
+                '@type': 'AboutPage',
+                mainEntity: {
+                  '@type': 'Organization',
+                  name: 'Rays trading',
+                  url: 'https://www.yourcompany.com',
+                  logo: 'https://www.yourcompany.com/logo.png',
 
-              sameAs: [
-                'https://www.facebook.com',
-                'https://www.instagram.com',
-                'ttps://www.linkedin.com/company',
-              ],
-              description:
-                doc.description ||
-                'Rays Trading is a leading provider of high-quality products and services, committed to excellence and customer satisfaction.',
-            },
+                  sameAs: [
+                    'https://www.facebook.com',
+                    'https://www.instagram.com',
+                    'ttps://www.linkedin.com/company',
+                  ],
+                  description:
+                    doc.description ||
+                    'Rays Trading is a leading provider of high-quality products and services, committed to excellence and customer satisfaction.',
+                },
+              },
+            ],
           }
 
           doc.schemaMarkup = schema
