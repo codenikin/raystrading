@@ -6,6 +6,7 @@ import { getPayload } from '@/lib/payload'
 import Footer from '@/components/Footer/Footer'
 import configPromise from '@payload-config'
 import { Anton } from 'next/font/google'
+import { GoogleAnalytics } from '@next/third-parties/google'
 import { WhatsAppWrapper } from '../components/WhatsAppWrapper'
 
 const anton = Anton({
@@ -34,6 +35,7 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
   return (
     <html className={`${anton.variable}`} lang="en">
       <head>
+        <GoogleAnalytics gaId="G-THN1ZLP21W" />
         <link href={faviconUrl} rel="icon" sizes="32x32" />
       </head>
       <body className="antialiased">
