@@ -7,7 +7,7 @@ WORKDIR /app
 COPY package.json pnpm-lock.yaml ./
 
 RUN pnpm install --frozen-lockfile
-ENV DATABASE_URL postgresql://rays:secret@db/raysdb
+ENV DATABASE_URL postgresql://rays:1234@db/dbrays
 ENV NEXT_PUBLIC_SERVER_URL https://raystrading.com
 ENV NEXT_PUBLIC_ORG_NAME Raytrading
 ENV PAYLOAD_SECRET secret

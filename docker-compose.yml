@@ -13,7 +13,7 @@ services:
     restart: unless-stopped
     environment:
       - PAYLOAD_SECRET=secret
-      - DATABASE_URL=postgresql://rays:secret@db/raysdb
+      - DATABASE_URL=postgresql://rays:1234@db/dbrays
       - NEXT_PUBLIC_SERVER_URL https://raystrading.com
       - NEXT_PUBLIC_ORG_NAME Raystrading
     networks:
@@ -23,8 +23,8 @@ services:
     image: docker.io/library/postgres:latest
     environment:
       - POSTGRES_USER=rays
-      - POSTGRES_PASSWORD=secret
-      - POSTGRES_DB=raysdb
+      - POSTGRES_PASSWORD=1234
+      - POSTGRES_DB=dbrays
     ports:
       - "5433:5432"
     volumes:
