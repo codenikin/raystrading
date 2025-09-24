@@ -92,13 +92,13 @@ export const Categories: CollectionConfig = {
     ...slugField(),
   ],
   hooks: {
-    afterChange: [
-      async ({ doc, operation, req }) => {
-        const baseUrl = process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3002'
+    beforeChange: [
+      async ({ data, operation, req }) => {
+        const baseUrl = process.env.NEXT_PUBLIC_SERVER_URL || 'https://raystrading.com'
 
-        if ((operation === 'create' || operation === 'update') && doc.products?.length) {
+        if ((operation === 'create' || operation === 'update') && data.products?.length) {
           const items = await Promise.all(
-            doc.products.map(async (productEntry: string | { id: string }, index: number) => {
+            data.products.map(async (productEntry: string | { id: string }, index: number) => {
               const productId = typeof productEntry === 'string' ? productEntry : productEntry?.id
               if (!productId) return null
 
@@ -133,9 +133,9 @@ export const Categories: CollectionConfig = {
             '@graph': [
               {
                 '@type': 'CollectionPage',
-                name: doc.title,
-                description: doc.description || '',
-                url: `${baseUrl}/categories/${doc.slug}`,
+                name: data.title,
+                description: data.description || '',
+                url: `${baseUrl}/categories/${data.slug}`,
                 mainEntity: {
                   '@type': 'ItemList',
                   itemListElement: filteredItems,
@@ -159,16 +159,16 @@ export const Categories: CollectionConfig = {
                   {
                     '@type': 'ListItem',
                     position: 3,
-                    name: doc.title,
-                    item: `${baseUrl}/products/${doc.slug}`,
+                    name: data.title,
+                    item: `${baseUrl}/products/${data.slug}`,
                   },
                 ],
               },
             ],
           }
 
-          doc.schemaMarkup = schema
-          return doc
+          data.schemaMarkup = schema
+          return data
         }
       },
     ],

@@ -146,17 +146,17 @@ export const Products: CollectionConfig = {
     ...slugField(),
   ],
   hooks: {
-    afterChange: [
-      async ({ doc, operation, req }) => {
+    beforeChange: [
+      async ({ data, operation }) => {
         if (operation === 'create' || operation === 'update') {
-          const media = doc.heroImage as Media
-          const price = doc.pricep
+          const media = data.heroImage as Media
+          const price = data.pricep
           const schema = {
             '@context': 'https://schema.org',
             '@type': 'Product',
-            name: doc.title,
-            description: doc.description,
-            sku: doc.sku,
+            name: data.title,
+            description: data.description,
+            sku: data.sku,
             image: media?.url || '',
             offers: {
               '@type': 'Offer',
@@ -171,8 +171,8 @@ export const Products: CollectionConfig = {
             },
           }
 
-          doc.schemaMarkup = schema
-          return doc
+          data.schemaMarkup = schema
+          return data
         }
       },
     ],

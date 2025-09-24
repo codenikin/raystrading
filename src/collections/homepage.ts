@@ -117,8 +117,8 @@ export const HomePage: CollectionConfig = {
     },
   ],
   hooks: {
-    afterChange: [
-      async ({ doc, operation }) => {
+    beforeChange: [
+      async ({ data, operation }) => {
         if (operation === 'create' || operation === 'update') {
           const schema = {
             '@context': 'https://schema.org',
@@ -128,7 +128,7 @@ export const HomePage: CollectionConfig = {
                 '@id': 'https://raystrading.com/#website',
                 url: 'https://raystrading.com/',
                 name: 'Rays Trading',
-                description: doc.description,
+                description: data.description,
                 potentialAction: {
                   '@type': 'SearchAction',
                   target: 'https://raystrading.com/search?q={search_term_string}',
@@ -141,7 +141,7 @@ export const HomePage: CollectionConfig = {
                 name: 'Rays Trading',
                 url: 'https://raystrading.com',
                 brand:
-                  doc.brands?.map(
+                  data.brands?.map(
                     (brand: {
                       title: string
                       description?: string
@@ -184,7 +184,7 @@ export const HomePage: CollectionConfig = {
                 url: 'https://raystrading.com',
                 inLanguage: 'en',
                 name: 'Home',
-                description: doc.description,
+                description: data.description,
                 isPartOf: {
                   '@id': 'https://raystrading.com/#website',
                 },
@@ -206,8 +206,8 @@ export const HomePage: CollectionConfig = {
               },
             ],
           }
-          doc.schemaMarkup = schema
-          return doc
+          data.schemaMarkup = schema
+          return data
         }
       },
     ],

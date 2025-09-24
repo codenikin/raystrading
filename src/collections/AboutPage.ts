@@ -105,8 +105,8 @@ export const AboutPage: CollectionConfig = {
     ...slugField(),
   ],
   hooks: {
-    afterChange: [
-      async ({ doc, operation }) => {
+    beforeChange: [
+      async ({ data, operation }) => {
         if (operation === 'create' || operation === 'update') {
           const schema = {
             '@context': 'https://schema.org',
@@ -116,7 +116,7 @@ export const AboutPage: CollectionConfig = {
                 '@id': 'https://raystrading.com/#website',
                 url: 'https://raystrading.com',
                 name: process.env.NEXT_PUBLIC_ORG_NAME,
-                description: doc.meta.description,
+                description: data.meta?.description,
                 potentialAction: {
                   '@type': 'SearchAction',
                   target: 'https://raystrading.com/search?q={search_term_string}',
@@ -144,7 +144,7 @@ export const AboutPage: CollectionConfig = {
                 '@id': 'https://raystrading.com/about-us/#contactpage',
                 url: 'https://raystrading.com/about-us',
                 name: 'About Us',
-                description: doc.description,
+                description: data.description,
                 about: {
                   '@id': 'https://raystrading.com/#organization',
                 },
@@ -173,8 +173,8 @@ export const AboutPage: CollectionConfig = {
             ],
           }
 
-          doc.schemaMarkup = schema
-          return doc
+          data.schemaMarkup = schema
+          return data
         }
       },
     ],
