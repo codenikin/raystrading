@@ -7,6 +7,8 @@ export const Forms: CollectionConfig = {
   },
   access: {
     read: () => true,
+    update: () => true,
+    delete: () => true,
   },
   fields: [
     {
