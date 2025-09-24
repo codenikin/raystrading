@@ -22,14 +22,14 @@ export default async function AboutPage() {
 export async function generateMetadata(p0: { doc: AboutPage }): Promise<Metadata> {
   const payload = await getPayload({ config: configPromise })
   const postsData = await payload.find({
-    collection: 'contactpage',
+    collection: 'about-page',
     depth: 1,
     limit: 3,
     overrideAccess: false,
     select: {
       title: true,
       slug: true,
-      categories: true,
+
       meta: true,
       publishedAt: true,
     },

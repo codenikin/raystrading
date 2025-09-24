@@ -56,16 +56,6 @@ const contactData: ContactInfo[] = [
 ]
 
 export const ContactClient: React.FC<ContactClientProps> = ({ schemaMarkup }) => {
-  // useEffect(() => {
-  //   const script = document.createElement('script')
-  //   script.type = 'application/ld+json'
-  //   script.text = schemaMarkup
-  //   document.head.appendChild(script)
-  //   return () => {
-  //     document.head.removeChild(script)
-  //   }
-  // }, [schemaMarkup])
-
   return (
     <>
       <script
