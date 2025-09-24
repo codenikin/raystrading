@@ -53,6 +53,7 @@ export default buildConfig({
     pool: {
       connectionString: process.env.DATABASE_URI || '',
     },
+    push: true,
     migrationDir: path.resolve(dirname, './migrations'),
   }),
   sharp,
@@ -61,7 +62,7 @@ export default buildConfig({
     seoPlugin({
       collections: ['Products'],
       uploadsCollection: 'media',
-      generateTitle: ({ doc }: { doc: ProductsType }) => `Lovosis Technology L.L.C — ${doc.title}`,
+      generateTitle: ({ doc }: { doc: ProductsType }) => `Rays trading Hosur — ${doc.title}`,
       generateURL: (args) => {
         const { doc, collectionConfig, collectionSlug } = args
         const slug = collectionSlug ?? collectionConfig?.slug ?? 'products'

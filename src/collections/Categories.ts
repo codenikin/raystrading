@@ -167,17 +167,9 @@ export const Categories: CollectionConfig = {
             ],
           }
 
-          req.payload.update({
-            collection: 'categories',
-            id: doc.id,
-            data: { schemaMarkup: schema },
-          })
-
           doc.schemaMarkup = schema
           return doc
         }
-
-        return doc
       },
     ],
   },

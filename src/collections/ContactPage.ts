@@ -114,31 +114,31 @@ export const ContactPage: CollectionConfig = {
     ...slugField(),
   ],
   hooks: {
-    afterChange: [
-      async ({ doc, operation }) => {
+    beforeChange: [
+      async ({ data, operation }) => {
         if (operation === 'create' || operation === 'update') {
           const schema = {
             '@context': 'https://schema.org',
             '@graph': [
               {
                 '@type': 'Organization',
-                name: doc.title,
+                name: data.title,
                 url: 'https://raystrading.com',
                 logo: 'https://raystrading.com/images/roundlogowhite.jpg',
                 contactPoint: {
                   '@type': 'ContactPoint',
-                  telephone: doc.Telephone,
+                  telephone: data.Telephone,
                   contactType: 'customer service',
                   areaServed: 'IN',
                   availableLanguage: ['English', 'Hindi'],
                 },
                 address: {
                   '@type': 'PostalAddress',
-                  streetAddress: doc.address?.street,
-                  addressLocality: doc.address?.city,
-                  addressRegion: doc.address?.state,
-                  postalCode: doc.address?.postalCode,
-                  addressCountry: doc.address?.country,
+                  streetAddress: data.address?.street,
+                  addressLocality: data.address?.city,
+                  addressRegion: data.address?.state,
+                  postalCode: data.address?.postalCode,
+                  addressCountry: data.address?.country,
                 },
                 sameAs: [
                   'https://www.facebook.com',
@@ -148,10 +148,11 @@ export const ContactPage: CollectionConfig = {
               },
             ],
           }
-          doc.schemaMarkup = schema
-          return doc
+          data.schemaMarkup = schema
+          return data
         }
       },
     ],
   },
 }
+export default ContactPage
