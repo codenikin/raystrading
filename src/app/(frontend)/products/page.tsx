@@ -87,8 +87,8 @@ export default async function prodcuts() {
                   Product Categories
                 </h2>
                 <p className="text-lg  text-gray-700  mx-auto">
-                  Browse through our extensive product categories to find the perfect security
-                  solution for your needs.
+                  Trusted battery dealer in Hosur – Rays Trading. Authorized Exide dealer offering
+                  Amaron & all major brands. Great deals & fast service
                 </p>
               </div>
 

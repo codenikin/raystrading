@@ -1,9 +1,12 @@
 'use client'
+import { AboutPage } from '@/payload-types'
 import Image from 'next/image'
+import { PaginatedDocs } from 'payload'
 import { useState } from 'react'
 
 interface AboutClientProps {
   schemaMarkup: string | number | true | { [k: string]: unknown } | unknown[]
+  aboutPage: PaginatedDocs<AboutPage>
 }
 type IconName =
   | 'award'
@@ -145,10 +148,10 @@ const iconPaths: Record<IconName, string> = {
     'M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z M15 13a3 3 0 11-6 0 3 3 0 016 0z',
 }
 
-export const AboutClient: React.FC<AboutClientProps> = ({ schemaMarkup }) => {
-  const [openFaq, setOpenFaq] = useState<number | null>(null)
-
-  const toggleFaq = (id: number) => {
+export const AboutClient: React.FC<AboutClientProps> = ({ schemaMarkup, aboutPage }) => {
+  const [openFaq, setOpenFaq] = useState<string | null>(null)
+  const aboutData = aboutPage.docs?.[0] || {}
+  const toggleFaq = (id: string) => {
     setOpenFaq(openFaq === id ? null : id)
   }
   return (
@@ -348,11 +351,11 @@ export const AboutClient: React.FC<AboutClientProps> = ({ schemaMarkup }) => {
             Frequently Asked Questions
           </h2>
           <div className="space-y-4">
-            {faqData.map((faq) => (
+            {aboutData.FaqSection?.map((faq) => (
               <div key={faq.id} className="border border-gray-200 rounded-lg overflow-hidden">
                 <button
                   className="w-full px-4 py-4 text-left bg-white hover:bg-gray-50 flex justify-between items-center focus:outline-none"
-                  onClick={() => toggleFaq(faq.id)}
+                  onClick={() => faq.id && toggleFaq(faq.id)}
                 >
                   <span className="font-medium text-gray-900">{faq.question}</span>
                   <svg
