@@ -16,7 +16,7 @@ export default async function ContactPage() {
   })
 
   const contactPage = contactPageRes.docs?.[0]
-  const schemaMarkup = contactPage?.schemaMarkup ? JSON.stringify(contactPage.schemaMarkup) : ''
+  const schemaMarkup = contactPage?.schemaMarkup || ''
   return <ContactClient schemaMarkup={schemaMarkup} />
 }
 export async function generateMetadata(): Promise<Metadata> {

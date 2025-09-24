@@ -112,22 +112,63 @@ export const AboutPage: CollectionConfig = {
             '@context': 'https://schema.org',
             '@graph': [
               {
-                '@type': 'AboutPage',
-                mainEntity: {
-                  '@type': 'Organization',
-                  name: 'Rays trading',
-                  url: 'https://www.yourcompany.com',
-                  logo: 'https://www.yourcompany.com/logo.png',
-
-                  sameAs: [
-                    'https://www.facebook.com',
-                    'https://www.instagram.com',
-                    'ttps://www.linkedin.com/company',
-                  ],
-                  description:
-                    doc.description ||
-                    'Rays Trading is a leading provider of high-quality products and services, committed to excellence and customer satisfaction.',
+                '@type': 'WebSite',
+                '@id': 'https://raystrading.com/#website',
+                url: 'https://raystrading.com',
+                name: process.env.NEXT_PUBLIC_ORG_NAME,
+                description: doc.meta.description,
+                potentialAction: {
+                  '@type': 'SearchAction',
+                  target: 'https://raystrading.com/search?q={search_term_string}',
+                  'query-input': 'required name=search_term_string',
                 },
+              },
+              {
+                '@type': 'Organization',
+                '@id': 'https://raystrading.com/#organization',
+                name: process.env.NEXT_PUBLIC_ORG_NAME,
+                url: 'https://raystrading.com',
+                logo: {
+                  '@type': 'ImageObject',
+                  url: 'https://raystrading.com/logo.png',
+                },
+
+                sameAs: [
+                  'https://www.facebook.com/raystrading',
+                  'https://www.instagram.com/raystrading',
+                  'https://www.linkedin.com/company/raystrading',
+                ],
+              },
+              {
+                '@type': 'AboutPage',
+                '@id': 'https://raystrading.com/about-us/#contactpage',
+                url: 'https://raystrading.com/about-us',
+                name: 'About Us',
+                description: doc.description,
+                about: {
+                  '@id': 'https://raystrading.com/#organization',
+                },
+                breadcrumb: {
+                  '@id': 'https://raystrading.com/#breadcrumb',
+                },
+              },
+              {
+                '@type': 'BreadcrumbList',
+                '@id': 'https://raystrading.com/#breadcrumb',
+                itemListElement: [
+                  {
+                    '@type': 'ListItem',
+                    position: 1,
+                    name: 'Home',
+                    item: 'raystrading.com',
+                  },
+                  {
+                    '@type': 'ListItem',
+                    position: 2,
+                    name: 'about-us',
+                    item: 'https://raystrading.com/about-us',
+                  },
+                ],
               },
             ],
           }

@@ -15,8 +15,8 @@ export default async function AboutPage() {
     pagination: false,
     depth: 3,
   })
-  const aboutPage = AboutPageres.docs?.[0]
-  const schemaMarkup = aboutPage?.schemaMarkup ? JSON.stringify(aboutPage.schemaMarkup) : ''
+  const aboutPage = AboutPageres.docs?.[0] || {}
+  const schemaMarkup = aboutPage.schemaMarkup || ''
   return <AboutClient schemaMarkup={schemaMarkup} />
 }
 export async function generateMetadata(): Promise<Metadata> {

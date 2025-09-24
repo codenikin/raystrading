@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { useState } from 'react'
 
 interface AboutClientProps {
-  schemaMarkup: string
+  schemaMarkup: string | number | true | { [k: string]: unknown } | unknown[]
 }
 type IconName =
   | 'award'

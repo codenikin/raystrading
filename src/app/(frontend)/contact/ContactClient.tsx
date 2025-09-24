@@ -4,7 +4,7 @@ import { useEffect } from 'react'
 import Image from 'next/image'
 
 interface ContactClientProps {
-  schemaMarkup: string
+  schemaMarkup: string | number | true | { [k: string]: unknown } | unknown[]
 }
 
 interface ContactInfo {
