@@ -1,7 +1,7 @@
 import { getPayload } from '@/lib/payload'
 import FloatingWhatsAppButton from '@/components/FloatingWhatsAppButton'
 import { SiteSetting } from '@/payload-types'
-
+import configPromise from '@payload-config'
 const defaultConfig: SiteSetting['whatsapp'] = {
   enabled: 'true' as const,
   phoneNumber: '971123456789',
@@ -14,7 +14,7 @@ export async function WhatsAppWrapper() {
   let whatsappConfig: SiteSetting['whatsapp'] = defaultConfig
 
   try {
-    const payload = await getPayload()
+    const payload = await getPayload({ config: configPromise })
     const settings = await payload.findGlobal({
       slug: 'site-settings',
     })

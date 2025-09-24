@@ -19,7 +19,7 @@ export default async function AboutPage() {
   const schemaMarkup = aboutPage?.schemaMarkup ? JSON.stringify(aboutPage.schemaMarkup) : ''
   return <AboutClient schemaMarkup={schemaMarkup} />
 }
-export async function generateMetadata(p0: { doc: AboutPage }): Promise<Metadata> {
+export async function generateMetadata(): Promise<Metadata> {
   const payload = await getPayload({ config: configPromise })
   const postsData = await payload.find({
     collection: 'about-page',
@@ -29,7 +29,6 @@ export async function generateMetadata(p0: { doc: AboutPage }): Promise<Metadata
     select: {
       title: true,
       slug: true,
-
       meta: true,
       publishedAt: true,
     },

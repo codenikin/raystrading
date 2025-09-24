@@ -4,6 +4,7 @@ import { Header } from '@/Header/Component'
 import { Media } from '@/payload-types'
 import { getPayload } from '@/lib/payload'
 import Footer from '@/components/Footer/Footer'
+import configPromise from '@payload-config'
 import { Anton } from 'next/font/google'
 import { WhatsAppWrapper } from '../components/WhatsAppWrapper'
 
@@ -19,7 +20,7 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
   let faviconUrl = '/favicon.ico' // Default fallback
 
   try {
-    const payload = await getPayload()
+    const payload = await getPayload({ config: configPromise })
     const siteSettings = await payload.findGlobal({ slug: 'site-settings' })
     favicon = siteSettings?.favicon as Media
     if (favicon?.url) {

@@ -539,6 +539,8 @@ export interface AboutPage {
     image?: (number | null) | Media;
     description?: string | null;
   };
+  slug?: string | null;
+  slugLock?: boolean | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -897,6 +899,8 @@ export interface AboutPageSelect<T extends boolean = true> {
         image?: T;
         description?: T;
       };
+  slug?: T;
+  slugLock?: T;
   updatedAt?: T;
   createdAt?: T;
 }

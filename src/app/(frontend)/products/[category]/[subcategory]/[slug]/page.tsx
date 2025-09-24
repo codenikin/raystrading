@@ -14,7 +14,8 @@ export async function generateMetadata({
 }: {
   params: Promise<{ slug: string; category: string; subcategory: string }>
 }): Promise<Metadata> {
-  const payload = await getPayload()
+  const configPromise = import('@/payload.config')
+  const payload = await getPayload({ config: configPromise })
 
   const productResult = await payload.find({
     collection: 'products',
@@ -68,8 +69,9 @@ type Args = {
 export default async function Product({ params }: { params: Promise<Args> }) {
   const { isEnabled: draft } = await draftMode()
   const { slug } = await params
+  const configPromise = import('@/payload.config')
 
-  const payload = await getPayload()
+  const payload = await getPayload({ config: configPromise })
   const productResult = await payload.find({
     collection: 'products',
     draft,

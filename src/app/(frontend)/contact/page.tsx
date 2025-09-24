@@ -19,7 +19,7 @@ export default async function ContactPage() {
   const schemaMarkup = contactPage?.schemaMarkup ? JSON.stringify(contactPage.schemaMarkup) : ''
   return <ContactClient schemaMarkup={schemaMarkup} />
 }
-export async function generateMetadata(p0: { doc: Contactpage }): Promise<Metadata> {
+export async function generateMetadata(): Promise<Metadata> {
   const payload = await getPayload({ config: configPromise })
   const postsData = await payload.find({
     collection: 'contactpage',

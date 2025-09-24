@@ -6,6 +6,7 @@ import {
   OverviewField,
   PreviewField,
 } from '@payloadcms/plugin-seo/fields'
+import { slugField } from '@/fields/slug'
 export const AboutPage: CollectionConfig = {
   slug: 'about-page',
   admin: {
@@ -98,6 +99,7 @@ export const AboutPage: CollectionConfig = {
         },
       ],
     },
+    ...slugField(),
   ],
   hooks: {
     afterChange: [
