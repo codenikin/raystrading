@@ -119,34 +119,79 @@ export const ContactPage: CollectionConfig = {
         if (operation === 'create' || operation === 'update') {
           const schema = {
             '@context': 'https://schema.org',
-            '@graph': [
+            '@type': 'LocalBusiness',
+            image: [
+              'https://raystrading.com/api/media/file/1X1.jpg',
+              'https://raystrading.com/api/media/file/400X300.jpg',
+              'https://raystrading.com/api/media/file/16x19.jpg',
+            ],
+            name: 'Rays Trading',
+
+            '@id': 'https://raystrading.com',
+            url: 'https://raystrading.com',
+            telephone: data.Telephone,
+            priceRange: '₹₹',
+            address: {
+              '@type': 'PostalAddress',
+              streetAddress: data.address?.street,
+              addressLocality: data.address?.city,
+              addressRegion: data.address?.state,
+              postalCode: data.address?.postalCode,
+              addressCountry: data.address?.country,
+            },
+
+            review: {
+              '@type': 'Review',
+              reviewRating: {
+                '@type': 'Rating',
+                ratingValue: 4.9,
+                bestRating: 5,
+              },
+              author: {
+                '@type': 'Person',
+                name: 'Prasad YR',
+              },
+            },
+            geo: {
+              '@type': 'GeoCoordinates',
+              latitude: '12.723610',
+              longitude: '77.825241',
+            },
+
+            openingHoursSpecification: [
               {
-                '@type': 'Organization',
-                name: data.title,
-                url: 'https://raystrading.com',
-                logo: 'https://raystrading.com/images/roundlogowhite.jpg',
-                contactPoint: {
-                  '@type': 'ContactPoint',
-                  telephone: data.Telephone,
-                  contactType: 'customer service',
-                  areaServed: 'IN',
-                  availableLanguage: ['English', 'Hindi'],
-                },
-                address: {
-                  '@type': 'PostalAddress',
-                  streetAddress: data.address?.street,
-                  addressLocality: data.address?.city,
-                  addressRegion: data.address?.state,
-                  postalCode: data.address?.postalCode,
-                  addressCountry: data.address?.country,
-                },
-                sameAs: [
-                  'https://www.facebook.com',
-                  'https://www.instagram.com',
-                  'ttps://www.linkedin.com/company',
+                '@type': 'OpeningHoursSpecification',
+                dayOfWeek: [
+                  'Monday',
+                  'Tuesday',
+                  'Wednesday',
+                  'Thursday',
+                  'Friday',
+                  'Saturday',
+                  'Sunday',
                 ],
+                opens: '00:00',
+                closes: '23:59',
               },
             ],
+
+            breadcrumb: {
+              '@type': 'BreadcrumbList',
+              itemListElement: [
+                {
+                  '@type': 'ListItem',
+                  position: 1,
+                  name: 'Home',
+                  item: 'https://raystrading.com',
+                },
+                {
+                  '@type': 'ListItem',
+                  position: 2,
+                  name: 'Contact Us',
+                  item: 'https://raystrading.com/contact',
+                },
+              ],
+            },
           }
           data.schemaMarkup = schema
           return data

@@ -6,24 +6,24 @@ import configPromise from '@payload-config'
 export default async function AmronClient() {
   const payload = await getPayload({ config: configPromise })
 
-  const amronSubcategory = (
+  const amronCategory = (
     await payload.find({
-      collection: 'subcategories',
+      collection: 'categories',
       where: {
         slug: {
-          equals: 'amron',
+          equals: 'amaron',
         },
       },
     })
   ).docs[0]
 
-  const products = amronSubcategory
+  const products = amronCategory
     ? (
         await payload.find({
           collection: 'products',
           where: {
-            subcategories: {
-              equals: amronSubcategory.id,
+            categories: {
+              equals: amronCategory.id,
             },
           },
           overrideAccess: false,

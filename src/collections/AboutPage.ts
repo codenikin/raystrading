@@ -130,7 +130,7 @@ export const AboutPage: CollectionConfig = {
                 url: 'https://raystrading.com',
                 logo: {
                   '@type': 'ImageObject',
-                  url: 'https://raystrading.com/logo.png',
+                  url: 'https://raystrading.com/api/media/file/rayslogo-7.png',
                 },
 
                 sameAs: [

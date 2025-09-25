@@ -71,9 +71,9 @@ export default async function HomePage() {
   })
 
   const HomePage = homePageData.docs?.[0] ?? null
-  const exideSubcategory = (
+  const exideCategory = (
     await payload.find({
-      collection: 'subcategories',
+      collection: 'categories',
       where: {
         slug: {
           equals: 'exide',
@@ -81,13 +81,13 @@ export default async function HomePage() {
       },
     })
   ).docs[0]
-  const products = exideSubcategory
+  const products = exideCategory
     ? (
         await payload.find({
           collection: 'products',
           where: {
-            subcategories: {
-              equals: exideSubcategory.id,
+            categories: {
+              equals: exideCategory.id,
             },
           },
           overrideAccess: false,

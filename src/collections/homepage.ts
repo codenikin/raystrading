@@ -163,7 +163,7 @@ export const HomePage: CollectionConfig = {
                 url: 'https://raystrading.com',
                 logo: {
                   '@type': 'ImageObject',
-                  url: 'https://raystrading.com/images/rayslogo.png',
+                  url: 'https://raystrading.com/api/media/file/rayslogo-7.png',
                 },
                 contactPoint: {
                   '@type': 'ContactPoint',
