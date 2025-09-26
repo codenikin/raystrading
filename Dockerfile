@@ -13,7 +13,7 @@ ENV NEXT_PUBLIC_ORG_NAME Raytrading
 ENV PAYLOAD_SECRET secret
 
 COPY . .
-RUN pnpm ci
+RUN pnpm payload migrate:create
 RUN pnpm build
 
 FROM node:24-alpine AS prod
