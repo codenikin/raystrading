@@ -11,7 +11,7 @@ export default function Footer() {
   return (
     <footer className="bg-white border-t border-gray-200">
       <div className="container mx-auto px-6 py-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-5 gap-6">
           {/* Company Info - Column 1 */}
           <div>
             <div className="flex items-center mb-3">
@@ -67,7 +67,7 @@ export default function Footer() {
           </div>
 
           {/* Quick Links - Column 2 - SAME STYLE AS GET IN TOUCH */}
-          <div>
+          <div className="px-0 lg:px-8">
             <h3 className="text-base font-semibold text-black mb-4">Quick Links</h3>
             <div className="space-y-2 text-sm text-black">
               <div className="flex items-start space-x-2">
@@ -122,8 +122,8 @@ export default function Footer() {
                   <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
                   <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
                 </svg>
-                <Link href="mailto:sales@dahua-dubai.com" className="hover:text-blue-600">
-                  sales@raystrading.com
+                <Link href="mailto:yogeshna3@gmail.com" className="hover:text-blue-600">
+                  yogeshna3@gmail.com
                 </Link>
               </div>
               <div className="flex items-start space-x-2">
@@ -154,14 +154,38 @@ export default function Footer() {
           </div>
 
           {/* Our Location - Column 4 - ORIGINAL MAP */}
-          <div>
-            <h3 className="text-base font-semibold text-black mb-4">Our Location</h3>
-            <p className="text-gray-600 text-sm mb-3 leading-relaxed">
-              Visit us at our Dubai office for all your surveillance and security needs.
-            </p>
+          <div className="px-4">
+            <h3 className="text-base font-semibold text-black mb-4">Our Branches</h3>
+            <ul className="text-gray-600 text-sm mb-3 leading-relaxed">
+              <li>Rays Trading(Exide care)</li>
+              <li>Srinagar - Kanyakumari Hwy,</li>
+              <li>Surya Nagar, Sri Nagar,</li>
+              <li>Hosur, Tamil Nadu 635109</li>
+            </ul>
             <div className="h-32 bg-gray-100 rounded-lg overflow-hidden shadow-sm">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d4646.83154390601!2d77.825076!3d12.727459999999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMTLCsDQzJzM4LjkiTiA3N8KwNDknMzAuMyJF!5e1!3m2!1sen!2sin!4v1757451075912!5m2!1sen!2sin"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4008.1639260164466!2d77.8269997!3d12.7383131!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae77418dfded45%3A0xe85e065846a5b88b!2sRAYS%20TRADING%20(EXIDE%20CARE)!5e1!3m2!1sen!2sin!4v1758898364284!5m2!1sen!2sin"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Hosur Location"
+              />
+            </div>
+          </div>
+          <div className="px-4">
+            <h3 className="text-base font-semibold text-black mb-4">Our Branches</h3>
+            <ul className="text-gray-600 text-sm mb-3 leading-relaxed">
+              <li>RAYS TRADING (EXIDE CARE)</li>
+              <li>MAHARAJA NAGAR, Hosur</li>
+              <li>Marasandiram, Tamil Nadu 635109</li>
+              <li>India</li>
+            </ul>
+            <div className="h-32 bg-gray-100 rounded-lg overflow-hidden shadow-sm">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4007.2886072472775!2d77.8550644!3d12.793545!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae77eec3ece561%3A0xe5e2662b9df60141!2sRAYS%20TRADING%20(EXIDE%20CARE)!5e1!3m2!1sen!2sin!4v1758898576688!5m2!1sen!2sin"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}
