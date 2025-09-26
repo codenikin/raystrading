@@ -55,7 +55,7 @@ export default buildConfig({
       connectionString: process.env.DATABASE_URI || '',
     },
     push: true,
-    prodMigrations: migrations,
+    // prodMigrations: migrations,
     migrationDir: path.resolve(dirname, './migrations'),
   }),
   sharp,
