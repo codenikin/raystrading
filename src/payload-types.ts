@@ -204,6 +204,7 @@ export interface Product {
   id: number;
   title: string;
   description: string;
+  batteryCapacity: '100ah' | '150ah' | '200ah';
   /**
    * Check this to display an offer ribbon on the product
    */
@@ -212,6 +213,14 @@ export interface Product {
    * Text to display in the offer ribbon (e.g., "20% OFF")
    */
   offerText?: string | null;
+  specifications: {
+    spec: string;
+    id?: string | null;
+  }[];
+  highlights: {
+    spec: string;
+    id?: string | null;
+  }[];
   content: {
     root: {
       type: string;
@@ -257,7 +266,10 @@ export interface Product {
     };
     [k: string]: unknown;
   };
-  pricep: string;
+  /**
+   * Enter price in Indian Rupees (without currency symbol)
+   */
+  pricep: number;
   heroImage?: (number | null) | Media;
   categories: number | Category;
   subcategories: number | Subcategory;
@@ -704,8 +716,21 @@ export interface MediaSelect<T extends boolean = true> {
 export interface ProductsSelect<T extends boolean = true> {
   title?: T;
   description?: T;
+  batteryCapacity?: T;
   onSale?: T;
   offerText?: T;
+  specifications?:
+    | T
+    | {
+        spec?: T;
+        id?: T;
+      };
+  highlights?:
+    | T
+    | {
+        spec?: T;
+        id?: T;
+      };
   content?: T;
   content1?: T;
   content2?: T;

@@ -314,37 +314,6 @@ export const AboutClient: React.FC<AboutClientProps> = ({ schemaMarkup, aboutPag
         </div>
       </section>
 
-      {/* <div className="slider-container overflow-hidden">
-          <div className="slider-track flex animate-slide-right-to-left">
-            {[...doubledSliders, ...doubledSliders, ...doubledSliders, ...doubledSliders].map(
-              (slider, index) => (
-                <div
-                  key={`slider-${index}-${slider.data.sliderAlt}`}
-                  className="slider-item flex-shrink-0 px-4 mx-2"
-                >
-                  <div className="slider-card relative flex h-48 w-48 sm:h-64 sm:w-64 items-center justify-center overflow-hidden rounded-xl bg-white shadow-lg shadow-blue-100/50 border border-blue-50 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-blue-200/50 group">
-                    <div className="slider-image-container flex h-full w-full items-center justify-center p-4 sm:p-6">
-                      <Image
-                        src={slider.data.slider}
-                        width={600}
-                        height={300}
-                        alt={slider.data.sliderAlt}
-                        className="slider-image max-h-full max-w-full object-contain opacity-85 brightness-110 transition-all duration-300 hover:opacity-100 hover:scale-110"
-                      />
-                    </div>
-                    <div className="slider-overlay absolute bottom-0 left-0 right-0 bg-gradient-to-t from-red-600/90 to-transparent p-3 sm:p-4 transform translate-y-full opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
-                      <p className="slider-name text-center text-sm sm:text-base font-medium text-white">
-                        {slider.data.sliderAlt}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              ),
-            )}
-          </div>
-        </div> */}
-
-      {/* FAQ Section */}
       <div className="bg-white py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto">
           <h2 className="text-3xl font-bold text-center text-gray-900 mb-8">

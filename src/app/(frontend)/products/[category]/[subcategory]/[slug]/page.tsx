@@ -120,7 +120,7 @@ export default async function Product({ params }: { params: Promise<Args> }) {
             priority
           />
           <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/40">
-            <h1 className="text-white text-4xl md:text-5xl font-bold drop-shadow-lg">
+            <h1 className="text-white text-4xl md:text-5xl font-bold drop-shadow-lg m-8">
               <span className="text-white">Rays</span>
               <span className="text-red-500"> Trading</span>
             </h1>
@@ -149,6 +149,7 @@ export default async function Product({ params }: { params: Promise<Args> }) {
                     {/* Image Gallery Section - Enhanced */}
                     <ProductImageSection
                       selectedImage={selectedImage}
+                      productHighlights={product.highlights}
                       productTitle={product.title}
                     />
                     {/* Product Details Section */}
@@ -176,7 +177,7 @@ export default async function Product({ params }: { params: Promise<Args> }) {
                               </div>
                               <span className="text-sm text-gray-500">(4.8 / 150 reviews)</span>
                             </div>
-                            <div className="text-2xl font-bold text-red-600">MRP:12450Rs</div>
+                            <div className="text-2xl font-bold text-red-600">{product.pricep}</div>
                           </div>
 
                           {/* Description */}
@@ -190,33 +191,38 @@ export default async function Product({ params }: { params: Promise<Args> }) {
                                 Battery Capacity
                               </h3>
                               <div className="grid grid-cols-3 gap-3">
-                                {['100AH', '150AH', '200AH'].map((size) => (
-                                  <label key={size} className="relative">
-                                    <input
-                                      type="radio"
-                                      name="storage"
-                                      value={size}
-                                      className="peer sr-only"
-                                    />
-                                    <div className="peer-checked:bg-red-600 peer-checked:text-white  text-black text-center py-2 border border-gray-300 rounded cursor-pointer transition-all hover:border-red-600 peer-checked:border-red-600">
-                                      {size}
-                                    </div>
-                                  </label>
+                                {['100ah', '150ah', '200ah'].map((capacity) => (
+                                  <div
+                                    key={capacity}
+                                    className={`px-4 py-2 rounded-lg border-2 cursor-pointer transition-all
+            ${
+              product.batteryCapacity === capacity
+                ? 'border-red-600 bg-red-50 text-red-600 font-medium'
+                : 'border-gray-200'
+            }`}
+                                  >
+                                    {capacity.toUpperCase()}
+                                  </div>
                                 ))}
                               </div>
                             </div>
                           </div>
 
                           {/* Product Highlights */}
-                          <div className="bg-gray-50 rounded-lg p-4 mb-6">
-                            <h3 className="text-sm font-medium text-gray-900 mb-3">Highlights</h3>
-                            <ul className="list-disc list-inside text-sm text-gray-600 space-y-2">
-                              <li>High-resolution imaging with advanced AI capabilities</li>
-                              <li>Night vision with up to 30m range</li>
-                              <li>IP67 weather-resistant design</li>
-                              <li>Smart motion detection with human recognition</li>
-                            </ul>
-                          </div>
+                          {product.specifications && product.specifications.length > 0 && (
+                            <div className="bg-gray-50 rounded-lg p-4 mb-6">
+                              <h3 className="text-sm font-medium text-gray-900 mb-3">
+                                Specifications
+                              </h3>
+                              <ul className="list-disc list-inside text-sm text-gray-600 space-y-2">
+                                {product.specifications.map((spec, index) => (
+                                  <li key={index} className="text-gray-600">
+                                    {spec.spec}
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                          )}
                         </div>
 
                         {/* Contact Button */}

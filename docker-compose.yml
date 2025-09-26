@@ -14,8 +14,8 @@ services:
     environment:
       - PAYLOAD_SECRET=secret
       - DATABASE_URL=postgresql://rays:1234@db/dbrays
-      - NEXT_PUBLIC_SERVER_URL https://raystrading.com
-      - NEXT_PUBLIC_ORG_NAME Raystrading
+      - NEXT_PUBLIC_SERVER_URL=https://raystrading.com
+      - NEXT_PUBLIC_ORG_NAME=Raystrading
     networks:
       - default-net
 

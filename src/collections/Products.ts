@@ -11,6 +11,16 @@ import {
 import { slugField } from '@/fields/slug'
 import { Media } from '@/payload-types'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
+
+// Function to format price in Indian Rupees
+const formatIndianPrice = (price: number): string => {
+  return new Intl.NumberFormat('en-IN', {
+    style: 'currency',
+    currency: 'INR',
+    maximumFractionDigits: 0,
+  }).format(price)
+}
+
 export const Products: CollectionConfig = {
   slug: 'products',
   access: {
@@ -45,6 +55,25 @@ export const Products: CollectionConfig = {
       required: true,
     },
     {
+      name: 'batteryCapacity',
+      type: 'select',
+      required: true,
+      options: [
+        {
+          label: '100AH',
+          value: '100ah',
+        },
+        {
+          label: '150AH',
+          value: '150ah',
+        },
+        {
+          label: '200AH',
+          value: '200ah',
+        },
+      ],
+    },
+    {
       name: 'onSale',
       type: 'checkbox',
       label: 'On Sale',
@@ -64,6 +93,32 @@ export const Products: CollectionConfig = {
       },
     },
 
+    {
+      name: 'specifications',
+      type: 'array',
+      label: 'Product Specifications',
+      required: true,
+      fields: [
+        {
+          name: 'spec',
+          type: 'text',
+          required: true,
+        },
+      ],
+    },
+    {
+      name: 'highlights',
+      type: 'array',
+      label: 'Product Highlights',
+      required: true,
+      fields: [
+        {
+          name: 'spec',
+          type: 'text',
+          required: true,
+        },
+      ],
+    },
     {
       name: 'content',
       type: 'richText',
@@ -85,8 +140,31 @@ export const Products: CollectionConfig = {
 
     {
       name: 'pricep',
-      type: 'text',
+      type: 'number',
       required: true,
+      admin: {
+        description: 'Enter price in Indian Rupees (without currency symbol)',
+        step: 1,
+      },
+      hooks: {
+        beforeValidate: [
+          ({ value }) => {
+            // Ensure the value is a number and not negative
+            if (typeof value === 'number' && value >= 0) {
+              return value
+            }
+            return 0
+          },
+        ],
+        afterRead: [
+          ({ value }) => {
+            if (typeof value === 'number') {
+              return formatIndianPrice(value)
+            }
+            return value
+          },
+        ],
+      },
     },
     {
       name: 'heroImage',
