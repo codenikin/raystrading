@@ -2,7 +2,8 @@ import { MigrateUpArgs, MigrateDownArgs, sql } from '@payloadcms/db-postgres'
 
 export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   await db.execute(sql`
-   CREATE TYPE "public"."enum_forms_fields_type" AS ENUM('text', 'email', 'tel', 'textarea', 'select');
+   CREATE TYPE "public"."enum_products_battery_capacity" AS ENUM('100ah', '150ah', '200ah');
+  CREATE TYPE "public"."enum_forms_fields_type" AS ENUM('text', 'email', 'tel', 'textarea', 'select');
   CREATE TYPE "public"."enum_form_submissions_status" AS ENUM('new', 'in-progress', 'completed');
   CREATE TYPE "public"."enum_header_nav_items_link_submenu_sub_type" AS ENUM('custom');
   CREATE TYPE "public"."enum_header_nav_items_link_type" AS ENUM('custom');
@@ -56,16 +57,31 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"sizes_thumbnail_filename" varchar
   );
   
+  CREATE TABLE "products_specifications" (
+  	"_order" integer NOT NULL,
+  	"_parent_id" integer NOT NULL,
+  	"id" varchar PRIMARY KEY NOT NULL,
+  	"spec" varchar NOT NULL
+  );
+  
+  CREATE TABLE "products_highlights" (
+  	"_order" integer NOT NULL,
+  	"_parent_id" integer NOT NULL,
+  	"id" varchar PRIMARY KEY NOT NULL,
+  	"spec" varchar NOT NULL
+  );
+  
   CREATE TABLE "products" (
   	"id" serial PRIMARY KEY NOT NULL,
   	"title" varchar NOT NULL,
   	"description" varchar NOT NULL,
+  	"battery_capacity" "enum_products_battery_capacity" NOT NULL,
   	"on_sale" boolean DEFAULT false,
   	"offer_text" varchar,
   	"content" jsonb NOT NULL,
   	"content1" jsonb NOT NULL,
   	"content2" jsonb NOT NULL,
-  	"pricep" varchar NOT NULL,
+  	"pricep" numeric NOT NULL,
   	"hero_image_id" integer,
   	"categories_id" integer NOT NULL,
   	"subcategories_id" integer NOT NULL,
@@ -353,6 +369,8 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   );
   
   ALTER TABLE "users_sessions" ADD CONSTRAINT "users_sessions_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."users"("id") ON DELETE cascade ON UPDATE no action;
+  ALTER TABLE "products_specifications" ADD CONSTRAINT "products_specifications_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."products"("id") ON DELETE cascade ON UPDATE no action;
+  ALTER TABLE "products_highlights" ADD CONSTRAINT "products_highlights_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."products"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "products" ADD CONSTRAINT "products_hero_image_id_media_id_fk" FOREIGN KEY ("hero_image_id") REFERENCES "public"."media"("id") ON DELETE set null ON UPDATE no action;
   ALTER TABLE "products" ADD CONSTRAINT "products_categories_id_categories_id_fk" FOREIGN KEY ("categories_id") REFERENCES "public"."categories"("id") ON DELETE set null ON UPDATE no action;
   ALTER TABLE "products" ADD CONSTRAINT "products_subcategories_id_subcategories_id_fk" FOREIGN KEY ("subcategories_id") REFERENCES "public"."subcategories"("id") ON DELETE set null ON UPDATE no action;
@@ -406,6 +424,10 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   CREATE UNIQUE INDEX "media_filename_idx" ON "media" USING btree ("filename");
   CREATE INDEX "media_sizes_og_image_sizes_og_image_filename_idx" ON "media" USING btree ("sizes_og_image_filename");
   CREATE INDEX "media_sizes_thumbnail_sizes_thumbnail_filename_idx" ON "media" USING btree ("sizes_thumbnail_filename");
+  CREATE INDEX "products_specifications_order_idx" ON "products_specifications" USING btree ("_order");
+  CREATE INDEX "products_specifications_parent_id_idx" ON "products_specifications" USING btree ("_parent_id");
+  CREATE INDEX "products_highlights_order_idx" ON "products_highlights" USING btree ("_order");
+  CREATE INDEX "products_highlights_parent_id_idx" ON "products_highlights" USING btree ("_parent_id");
   CREATE INDEX "products_hero_image_idx" ON "products" USING btree ("hero_image_id");
   CREATE INDEX "products_categories_idx" ON "products" USING btree ("categories_id");
   CREATE INDEX "products_subcategories_idx" ON "products" USING btree ("subcategories_id");
@@ -504,6 +526,8 @@ export async function down({ db, payload, req }: MigrateDownArgs): Promise<void>
    DROP TABLE "users_sessions" CASCADE;
   DROP TABLE "users" CASCADE;
   DROP TABLE "media" CASCADE;
+  DROP TABLE "products_specifications" CASCADE;
+  DROP TABLE "products_highlights" CASCADE;
   DROP TABLE "products" CASCADE;
   DROP TABLE "categories" CASCADE;
   DROP TABLE "categories_rels" CASCADE;
@@ -530,6 +554,7 @@ export async function down({ db, payload, req }: MigrateDownArgs): Promise<void>
   DROP TABLE "header" CASCADE;
   DROP TABLE "site_settings_socials" CASCADE;
   DROP TABLE "site_settings" CASCADE;
+  DROP TYPE "public"."enum_products_battery_capacity";
   DROP TYPE "public"."enum_forms_fields_type";
   DROP TYPE "public"."enum_form_submissions_status";
   DROP TYPE "public"."enum_header_nav_items_link_submenu_sub_type";

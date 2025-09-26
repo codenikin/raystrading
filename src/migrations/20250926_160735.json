@@ -1,5 +1,5 @@
 {
-  "id": "cb69b08e-1cd5-4374-b19e-b81d9ffb7aba",
+  "id": "da4308e3-9bd3-4fa4-b4df-3415d451e764",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -455,6 +455,170 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
+    "public.products_specifications": {
+      "name": "products_specifications",
+      "schema": "",
+      "columns": {
+        "_order": {
+          "name": "_order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_parent_id": {
+          "name": "_parent_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id": {
+          "name": "id",
+          "type": "varchar",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "spec": {
+          "name": "spec",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {
+        "products_specifications_order_idx": {
+          "name": "products_specifications_order_idx",
+          "columns": [
+            {
+              "expression": "_order",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "products_specifications_parent_id_idx": {
+          "name": "products_specifications_parent_id_idx",
+          "columns": [
+            {
+              "expression": "_parent_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "products_specifications_parent_id_fk": {
+          "name": "products_specifications_parent_id_fk",
+          "tableFrom": "products_specifications",
+          "tableTo": "products",
+          "columnsFrom": [
+            "_parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.products_highlights": {
+      "name": "products_highlights",
+      "schema": "",
+      "columns": {
+        "_order": {
+          "name": "_order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_parent_id": {
+          "name": "_parent_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id": {
+          "name": "id",
+          "type": "varchar",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "spec": {
+          "name": "spec",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {
+        "products_highlights_order_idx": {
+          "name": "products_highlights_order_idx",
+          "columns": [
+            {
+              "expression": "_order",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "products_highlights_parent_id_idx": {
+          "name": "products_highlights_parent_id_idx",
+          "columns": [
+            {
+              "expression": "_parent_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "products_highlights_parent_id_fk": {
+          "name": "products_highlights_parent_id_fk",
+          "tableFrom": "products_highlights",
+          "tableTo": "products",
+          "columnsFrom": [
+            "_parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
     "public.products": {
       "name": "products",
       "schema": "",
@@ -474,6 +638,13 @@
         "description": {
           "name": "description",
           "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "battery_capacity": {
+          "name": "battery_capacity",
+          "type": "enum_products_battery_capacity",
+          "typeSchema": "public",
           "primaryKey": false,
           "notNull": true
         },
@@ -510,7 +681,7 @@
         },
         "pricep": {
           "name": "pricep",
-          "type": "varchar",
+          "type": "numeric",
           "primaryKey": false,
           "notNull": true
         },
@@ -4112,6 +4283,15 @@
     }
   },
   "enums": {
+    "public.enum_products_battery_capacity": {
+      "name": "enum_products_battery_capacity",
+      "schema": "public",
+      "values": [
+        "100ah",
+        "150ah",
+        "200ah"
+      ]
+    },
     "public.enum_forms_fields_type": {
       "name": "enum_forms_fields_type",
       "schema": "public",
