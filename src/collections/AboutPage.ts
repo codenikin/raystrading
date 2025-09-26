@@ -160,7 +160,7 @@ export const AboutPage: CollectionConfig = {
                     '@type': 'ListItem',
                     position: 1,
                     name: 'Home',
-                    item: 'raystrading.com',
+                    item: 'https://raystrading.com',
                   },
                   {
                     '@type': 'ListItem',

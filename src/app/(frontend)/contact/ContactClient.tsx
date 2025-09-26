@@ -35,8 +35,8 @@ const contactData: ContactInfo[] = [
     type: 'email',
     title: 'Email Us',
     text: 'send us your requirements',
-    value: 'sales@Raysgroup.com',
-    href: 'mailto:sales@Raysgroup.com',
+    value: 'yogeshna3@gmail.com',
+    href: 'mailto:yogeshna3@gmail.com',
     bgColor: 'bg-green-100',
     iconColor: 'text-green-600',
     hoverColor: 'hover:text-green-700',
@@ -151,7 +151,7 @@ export const ContactClient: React.FC<ContactClientProps> = ({ schemaMarkup }) =>
                     allowFullScreen
                     loading="lazy"
                     referrerPolicy="no-referrer-when-downgrade"
-                    title="EZVIZ Dubai Location"
+                    title="Rays Trading Company Location"
                   ></iframe>
                 </div>
               </div>

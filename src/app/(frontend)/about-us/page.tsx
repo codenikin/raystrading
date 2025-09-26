@@ -15,7 +15,7 @@ export default async function AboutPage() {
     pagination: false,
     depth: 3,
   })
-  console.log(AboutPageres)
+
   const aboutPage = AboutPageres.docs?.[0] || {}
   const schemaMarkup = aboutPage.schemaMarkup || ''
   return <AboutClient aboutPage={AboutPageres} schemaMarkup={schemaMarkup} />
