@@ -25,4 +25,4 @@ COPY --from=builder /app/media ./media
 EXPOSE 3000
 EXPOSE 3333
 
-CMD HOSTNAME="0.0.0.0" node server.js
+CMD NODE_ENV=production HOSTNAME="0.0.0.0" node server.js
