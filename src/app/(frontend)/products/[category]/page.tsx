@@ -48,7 +48,7 @@ export async function generateMetadata({
       title,
       description,
       url: `${process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3002'}/products/${category}`,
-      siteName: 'Lovosis Technology L.L.C',
+      siteName: 'Rays Trading Hosur',
       locale: 'en_US',
       type: 'website',
       images: isImageObject
@@ -125,12 +125,12 @@ export default async function Product({ params }: { params: Promise<Args> }) {
           />
           <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/40">
             <h1 className="text-white text-4xl md:text-5xl font-bold drop-shadow-lg">
-              <span className="text-white">Dahua</span>
-              <span className="text-red-500"> Products</span>
+              <span className="text-white">Rays</span>
+              <span className="text-red-500"> Trading</span>
             </h1>
             <p className="text-xl max-w-3xl text-white/90">
-              Discover our comprehensive range of security products designed to meet all your
-              surveillance and safety needs.
+              est battery dealer in Hosur & Bangalore. Authorized Exide & Amaron dealer. Car, bike &
+              inverter batteries with expert service & support.
             </p>
           </div>
         </div>

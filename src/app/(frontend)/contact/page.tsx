@@ -21,7 +21,7 @@ export default async function ContactPage() {
 }
 export async function generateMetadata(): Promise<Metadata> {
   const payload = await getPayload({ config: configPromise })
-  const postsData = await payload.find({
+  const contactPageRes = await payload.find({
     collection: 'contactpage',
     depth: 1,
     limit: 3,
@@ -34,6 +34,6 @@ export async function generateMetadata(): Promise<Metadata> {
       publishedAt: true,
     },
   })
-
-  return generateMeta({ doc: postsData.docs[0] })
+  const doc: Contactpage | null = contactPageRes.docs?.[0] || null
+  return generateMeta({ doc })
 }

@@ -74,7 +74,7 @@ export default function FeatureBlocks() {
   return (
     <section
       ref={ref}
-      className="py-24 bg-gradient-to-b from-gray-900 to-black text-white relative overflow-hidden"
+      className="py-24 bg-gradient-to-b from-gray-900 p-8 to-black text-white relative overflow-hidden"
     >
       <div className="mx-auto mb-12 w-full space-y-1 text-center sm:w-1/2 lg:w-1/3">
         <h2 className="text-4xl font-bold mb-8 text-center font-anton text-gray-900">

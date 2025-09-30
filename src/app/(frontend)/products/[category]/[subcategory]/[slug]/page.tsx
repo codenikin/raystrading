@@ -42,7 +42,7 @@ export async function generateMetadata({
   return {
     title: product.title,
     description: product.meta?.description ?? '',
-    metadataBase: new URL('http://localhost:3002'),
+    metadataBase: new URL('https://raystrading.com'),
     alternates: {
       canonical: '/',
       languages: {
