@@ -39,9 +39,14 @@ export const Subcategories: CollectionConfig = {
     },
     {
       name: 'products',
+      type: 'join',
+      collection: 'products',
+      on: 'subcategories'
+    },
+    {
+      name: 'categories',
       type: 'relationship',
-      relationTo: 'products',
-      hasMany: true,
+      relationTo: 'categories'
     },
     {
       name: 'schemaMarkup',

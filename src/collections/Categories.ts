@@ -40,15 +40,15 @@ export const Categories: CollectionConfig = {
     },
     {
       name: 'products',
-      type: 'relationship',
-      relationTo: 'products',
-      hasMany: true,
+      type: 'join',
+      collection: 'products',
+      on: 'categories'
     },
     {
       name: 'subcategories',
-      type: 'relationship',
-      relationTo: 'subcategories',
-      hasMany: true,
+      type: 'join',
+      collection: 'subcategories',
+      on: 'categories'
     },
     {
       name: 'schemaMarkup',

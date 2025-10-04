@@ -159,13 +159,11 @@ export const Products: CollectionConfig = {
       name: 'categories',
       type: 'relationship',
       relationTo: 'categories',
-      required: true,
     },
     {
       name: 'subcategories',
       type: 'relationship',
       relationTo: 'subcategories',
-      required: true,
     },
 
     {

@@ -81,7 +81,15 @@ export interface Config {
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
-  collectionsJoins: {};
+  collectionsJoins: {
+    categories: {
+      products: 'products';
+      subcategories: 'subcategories';
+    };
+    subcategories: {
+      products: 'products';
+    };
+  };
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
@@ -271,8 +279,8 @@ export interface Product {
    */
   pricep: number;
   heroImage?: (number | null) | Media;
-  categories: number | Category;
-  subcategories: number | Subcategory;
+  categories?: (number | null) | Category;
+  subcategories?: (number | null) | Subcategory;
   schemaMarkup?:
     | {
         [k: string]: unknown;
@@ -304,8 +312,16 @@ export interface Category {
   title: string;
   description: string;
   categoryImage?: (number | null) | Media;
-  products?: (number | Product)[] | null;
-  subcategories?: (number | Subcategory)[] | null;
+  products?: {
+    docs?: (number | Product)[];
+    hasNextPage?: boolean;
+    totalDocs?: number;
+  };
+  subcategories?: {
+    docs?: (number | Subcategory)[];
+    hasNextPage?: boolean;
+    totalDocs?: number;
+  };
   schemaMarkup?:
     | {
         [k: string]: unknown;
@@ -337,7 +353,12 @@ export interface Subcategory {
   title: string;
   description: string;
   SubcategoryImage?: (number | null) | Media;
-  products?: (number | Product)[] | null;
+  products?: {
+    docs?: (number | Product)[];
+    hasNextPage?: boolean;
+    totalDocs?: number;
+  };
+  categories?: (number | null) | Category;
   schemaMarkup?:
     | {
         [k: string]: unknown;
@@ -783,6 +804,7 @@ export interface SubcategoriesSelect<T extends boolean = true> {
   description?: T;
   SubcategoryImage?: T;
   products?: T;
+  categories?: T;
   schemaMarkup?: T;
   meta?:
     | T
