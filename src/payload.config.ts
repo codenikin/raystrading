@@ -3,6 +3,7 @@ import { postgresAdapter } from '@payloadcms/db-postgres'
 import { payloadCloudPlugin } from '@payloadcms/payload-cloud'
 import { seoPlugin } from '@payloadcms/plugin-seo'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
+import { migrations } from './migrations'
 import path from 'path'
 import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
@@ -54,7 +55,7 @@ export default buildConfig({
       connectionString: process.env.DATABASE_URI || '',
     },
     push: true,
-    // prodMigrations: migrations,
+    prodMigrations: migrations,
     migrationDir: path.resolve(dirname, './migrations'),
   }),
   sharp,
