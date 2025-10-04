@@ -236,8 +236,8 @@ export const Products: CollectionConfig = {
             },
             aggregateRating: {
               '@type': 'AggregateRating',
-              ratingValue: 5.4,
-              reviewCount: 9,
+              ratingValue: 4.2,
+              reviewCount: 19,
             },
             offers: {
               '@type': 'Offer',
