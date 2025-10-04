@@ -1,10 +1,11 @@
 export const dynamic = 'force-dynamic'
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
-import type { Category, Product } from '@/payload-types'
+import type { Category, Product, Subcategory } from '@/payload-types'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Metadata } from 'next'
+import { s } from 'node_modules/framer-motion/dist/types.d-Cjd591yU'
 
 type Media = {
   url: string
@@ -77,7 +78,7 @@ export default async function Product({ params }: { params: Promise<Args> }) {
   const payload = await getPayload({ config: configPromise })
   const categoryResult = await payload.find({
     collection: 'categories',
-    depth: 2,
+    depth: 7,
     limit: 12,
     overrideAccess: false,
     where: {
@@ -100,7 +101,17 @@ export default async function Product({ params }: { params: Promise<Args> }) {
       </div>
     )
   }
-  const subcategories = categoryDoc?.subcategories
+
+  const subcategories = await payload.find({
+    collection: 'subcategories',
+    depth: 2,
+    overrideAccess: false,
+    where: {
+      slug: {
+        in: categoryDoc.subcategories?.docs?.map((s) => (s as Subcategory).slug),
+      },
+    },
+  })
   const categoryTitle = categoryDoc?.title
 
   return (
@@ -150,7 +161,7 @@ export default async function Product({ params }: { params: Promise<Args> }) {
 
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                  {subcategories?.map((cat) => {
+                  {subcategories?.docs?.map((cat) => {
                     if (typeof cat !== 'object' || cat === null || !('id' in cat)) return null
                     return (
                       <div key={cat.id} className="p-4 ">

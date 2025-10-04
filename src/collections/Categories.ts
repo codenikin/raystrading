@@ -9,6 +9,7 @@ import {
   PreviewField,
 } from '@payloadcms/plugin-seo/fields'
 import { slugField } from '@/fields/slug'
+import { Product } from '@/payload-types'
 
 export const Categories: CollectionConfig = {
   slug: 'categories',
@@ -42,13 +43,13 @@ export const Categories: CollectionConfig = {
       name: 'products',
       type: 'join',
       collection: 'products',
-      on: 'categories'
+      on: 'categories',
     },
     {
       name: 'subcategories',
       type: 'join',
       collection: 'subcategories',
-      on: 'categories'
+      on: 'categories',
     },
     {
       name: 'schemaMarkup',
@@ -95,38 +96,27 @@ export const Categories: CollectionConfig = {
     beforeChange: [
       async ({ data, operation, req }) => {
         const baseUrl = process.env.NEXT_PUBLIC_SERVER_URL || 'https://raystrading.com'
+        if (operation === 'create' || operation === 'update') {
+          const category = (
+            await req.payload.find({
+              collection: 'categories',
+              depth: 2,
+              where: { slug: data.slug },
+            })
+          ).docs[0]
 
-        if ((operation === 'create' || operation === 'update') && data.products?.length) {
-          const items = await Promise.all(
-            data.products.map(async (productEntry: string | { id: string }, index: number) => {
-              const productId = typeof productEntry === 'string' ? productEntry : productEntry?.id
-              if (!productId) return null
+          const items = category?.products?.docs?.map(async (productEntry, index: number) => {
+            const product = productEntry as Product
+            if (!product.id) return null
+            return {
+              '@type': 'ListItem',
+              position: index + 1,
+              name: product.title,
+              url: `${baseUrl}/products/${product.slug}`,
+            }
+          })
 
-              try {
-                const product = await req.payload.findByID({
-                  collection: 'products',
-                  id: productId,
-                })
-
-                if (!product || !product.title || !product.slug) {
-                  console.warn(`Product ${productId} missing required fields`)
-                  return null
-                }
-
-                return {
-                  '@type': 'ListItem',
-                  position: index + 1,
-                  name: product.title,
-                  url: `${baseUrl}/products/${product.slug}`,
-                }
-              } catch (err) {
-                console.error(`Failed to fetch product ${productId}:`, err)
-                return null
-              }
-            }),
-          )
-
-          const filteredItems = items.filter(Boolean)
+          const filteredItems = items?.filter(Boolean)
 
           const schema = {
             '@context': 'https://schema.org',
@@ -135,7 +125,7 @@ export const Categories: CollectionConfig = {
                 '@type': 'CollectionPage',
                 name: data.title,
                 description: data.description || '',
-                url: `${baseUrl}/categories/${data.slug}`,
+                url: `${baseUrl}/products/${data.slug}`,
                 mainEntity: {
                   '@type': 'ItemList',
                   itemListElement: filteredItems,

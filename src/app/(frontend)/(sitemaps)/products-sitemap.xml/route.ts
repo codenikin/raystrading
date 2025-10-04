@@ -31,7 +31,7 @@ const getPagesSitemap = unstable_cache(
       ? results.docs
           .filter((category) => Boolean(category?.slug))
           .map((category) => {
-            return category.subcategories?.map((subCategory) => {
+            return category.subcategories?.docs?.map((subCategory) => {
               const subCat = subCategory as Subcategory
               return {
                 loc: `${SITE_URL}/products/${category?.slug}/${subCat.slug}`,
@@ -47,9 +47,9 @@ const getPagesSitemap = unstable_cache(
       ? results.docs
           .filter((category) => Boolean(category?.slug))
           .map((category) => {
-            return category.subcategories?.map((subCategory) => {
+            return category.subcategories?.docs?.map((subCategory) => {
               const subCat = subCategory as Subcategory
-              return subCat.products?.map((product) => {
+              return subCat.products?.docs?.map((product) => {
                 const prod = product as Product
                 return {
                   loc: `${SITE_URL}/products/${category?.slug}/${subCat.slug}/${prod.slug}`,

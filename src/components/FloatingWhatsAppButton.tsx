@@ -10,20 +10,21 @@ interface FloatingWhatsAppButtonProps {
 const FloatingWhatsAppButton = ({ config }: FloatingWhatsAppButtonProps) => {
   if (!config || config.enabled === 'false') return null
 
-  const cleanMessage = (message: string) => {
+  const cleanMessage = (message?: string | null) => {
+    if (typeof message !== 'string' || !message.trim()) return ''
     const textOnly = message.replace(/<[^>]*>/g, '')
     return textOnly.replace(/&[^;]+;/g, '')
   }
 
-  const statusMessage = cleanMessage(config.statusMessage)
-  const chatMessage = cleanMessage(config.chatMessage)
+  const statusMessage = cleanMessage(config?.statusMessage) || 'Online'
+  const chatMessage = cleanMessage(config?.chatMessage) || 'Hello! 👋 How can we help you today?'
 
   return (
     <div className="whatsapp-button-wrapper">
       <div className="fixed bottom-4 right-4 text-black z-20">
         <FloatingWhatsApp
           phoneNumber={config.phoneNumber}
-          accountName={config.accountName}
+          accountName={config.accountName || 'Support'}
           statusMessage={statusMessage}
           chatMessage={chatMessage}
           allowClickAway={false}
@@ -31,7 +32,7 @@ const FloatingWhatsAppButton = ({ config }: FloatingWhatsAppButtonProps) => {
           notification={false}
           notificationSound={false}
           chatboxHeight={420}
-          allowEsc={true}
+          allowEsc
         />
       </div>
     </div>

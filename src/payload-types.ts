@@ -358,7 +358,7 @@ export interface Subcategory {
     hasNextPage?: boolean;
     totalDocs?: number;
   };
-  categories?: (number | null) | Category;
+  categories?: (number | Category)[] | null;
   schemaMarkup?:
     | {
         [k: string]: unknown;

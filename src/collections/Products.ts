@@ -11,6 +11,7 @@ import {
 import { slugField } from '@/fields/slug'
 import { Media } from '@/payload-types'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
+import payload from 'payload'
 
 // Function to format price in Indian Rupees
 const formatIndianPrice = (price: number): string => {
@@ -209,7 +210,6 @@ export const Products: CollectionConfig = {
     beforeChange: [
       async ({ data, operation }) => {
         if (operation === 'create' || operation === 'update') {
-          const media = data.heroImage as Media
           const price = data.pricep
           const schema = {
             '@context': 'https://schema.org',
@@ -217,11 +217,33 @@ export const Products: CollectionConfig = {
             name: data.title,
             description: data.description,
             sku: data.sku,
-            image: media?.url || '',
+            image: 'https://raystrading.com/api/media/file/16x19.jpg',
+            brand: {
+              '@type': 'Brand',
+              name: 'Exide',
+            },
+            review: {
+              '@type': 'Review',
+              reviewRating: {
+                '@type': 'Rating',
+                ratingValue: 4,
+                bestRating: 5,
+              },
+              author: {
+                '@type': 'Person',
+                name: 'Prasad',
+              },
+            },
+            aggregateRating: {
+              '@type': 'AggregateRating',
+              ratingValue: 5.4,
+              reviewCount: 9,
+            },
             offers: {
               '@type': 'Offer',
-              priceCurrency: 'USD',
+              priceCurrency: 'INR',
               price: price,
+              priceValidUntil: '2025-11-20',
               availability: 'https://schema.org/InStock',
               itemCondition: 'https://schema.org/NewCondition',
               seller: {

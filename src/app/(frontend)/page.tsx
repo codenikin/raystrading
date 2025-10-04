@@ -109,7 +109,7 @@ export default async function HomePage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(HomePage?.schemaMarkup),
+          __html: JSON.stringify(HomePage?.schemaMarkup || {}),
         }}
       />
       <div className="relative w-full overflow-hidden">

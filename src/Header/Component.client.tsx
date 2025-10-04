@@ -134,7 +134,7 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({
               {/* Logo on the right */}
               <Link href="/" style={{ display: 'block' }}>
                 <Image
-                  src={logo.url!}
+                  src={logo?.url!}
                   alt={logo?.alt || 'Site Logo'}
                   width={100}
                   height={30}
@@ -150,7 +150,7 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({
             >
               <Link href="/" style={{ display: 'block' }}>
                 <Image
-                  src={logo.url!}
+                  src={logo?.url!}
                   alt={logo?.alt || 'Site Logo'}
                   width={140}
                   height={40}
