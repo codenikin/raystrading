@@ -70,7 +70,6 @@ export default async function Product({ params }: { params: Promise<Args> }) {
   const { isEnabled: draft } = await draftMode()
   const { slug } = await params
   const configPromise = import('@/payload.config')
-
   const payload = await getPayload({ config: configPromise })
   const productResult = await payload.find({
     collection: 'products',
@@ -86,7 +85,13 @@ export default async function Product({ params }: { params: Promise<Args> }) {
   })
 
   const product = productResult.docs[0]
-
+  function formatIndianPrice(price: number | string) {
+    return Number(price).toLocaleString('en-IN', {
+      style: 'currency',
+      currency: 'INR',
+      maximumFractionDigits: 0,
+    })
+  }
   if (!product) {
     return (
       <div className="pt-[90px] min-h-screen flex items-center justify-center">
@@ -111,7 +116,7 @@ export default async function Product({ params }: { params: Promise<Args> }) {
       </Script>
 
       <div className="pt-[80px] min-h-screen flex flex-col bg-white">
-        <div className="relative w-full h-[320px] md:h-[420px]">
+        <div className="relative w-full h-[320px] md:h-[620px]">
           <Image
             src="/images/bg.jpg"
             alt="Dahua Solutions Banner"
@@ -120,11 +125,11 @@ export default async function Product({ params }: { params: Promise<Args> }) {
             priority
           />
           <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/40">
-            <h1 className="text-white text-4xl md:text-5xl font-bold drop-shadow-lg m-8">
-              <span className="text-white">Rays</span>
-              <span className="text-red-500"> Trading</span>
+            <h1 className="text-white text-4xl md:text-5xl font-bold drop-shadow-lg animate-bounce m-8">
+              <span className="text-white font-anton text-5xl md:text-7xl">RAYS</span>
+              <span className="text-red-500 font-anton text-5xl md:text-7xl"> TRADING HOSUR</span>
             </h1>
-            <p className="text-xl max-w-3xl text-white/90">
+            <p className="text-xl max-w-3xl text-white/90 p-8 md:pd-0">
               Trusted Exide battery distributor, Rays Trading delivers reliable power solutions for
               cars, inverters & industries. Quality you can count on.
             </p>
@@ -177,7 +182,9 @@ export default async function Product({ params }: { params: Promise<Args> }) {
                               </div>
                               <span className="text-sm text-gray-500">(4.8 / 150 reviews)</span>
                             </div>
-                            <div className="text-2xl font-bold text-red-600">{product.pricep}</div>
+                            <div className="text-2xl font-bold text-red-600">
+                              {formatIndianPrice(product.pricep)}
+                            </div>
                           </div>
 
                           {/* Description */}

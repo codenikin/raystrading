@@ -73,8 +73,8 @@ export default async function prodcuts() {
               <span className="text-red-500 font-anton text-5xl md:text-7xl"> TRADING HOSUR</span>
             </h1>
             <p className="text-xl  text-white/90 p-8 md:pd-0">
-              Discover our comprehensive range of security products designed to meet all your
-              surveillance and safety needs.
+              Stay unstoppable with Amaron batteries at Rays Trading, Hosur. High cranking power,
+              zero maintenance, and long-lasting energy for cars, trucks, and home inverters.
             </p>
           </div>
         </div>

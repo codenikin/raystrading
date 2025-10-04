@@ -115,7 +115,7 @@ export default async function Product({ params }: { params: Promise<Args> }) {
         }}
       />
       <div className="pt-[80px] min-h-screen flex flex-col bg-white">
-        <div className="relative w-full h-[320px] md:h-[420px]">
+        <div className="relative w-full h-[320px] md:h-[620px]">
           <Image
             src="/images/bg.jpg"
             alt="Dahua Solutions Banner"
@@ -124,13 +124,14 @@ export default async function Product({ params }: { params: Promise<Args> }) {
             priority
           />
           <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/40">
-            <h1 className="text-white text-4xl md:text-5xl font-bold drop-shadow-lg">
-              <span className="text-white">Rays</span>
-              <span className="text-red-500"> Trading</span>
+            <h1 className="text-white p-8 md:p-0 mt-8 font-bold drop-shadow-lg animate-bounce">
+              <span className="text-white font-anton text-5xl md:text-7xl">RAYS</span>
+              <span className="text-red-500 font-anton text-5xl md:text-7xl"> TRADING HOSUR</span>
             </h1>
-            <p className="text-xl max-w-3xl text-white/90">
-              est battery dealer in Hosur & Bangalore. Authorized Exide & Amaron dealer. Car, bike &
-              inverter batteries with expert service & support.
+            <p className="text-xl  text-white/90 p-8 md:pd-0">
+              Power your vehicle with reliable Exide batteries from Rays Trading, Hosur. Trusted
+              performance for cars, trucks, inverters, and solar systems — built for long life and
+              superior starting power
             </p>
           </div>
         </div>

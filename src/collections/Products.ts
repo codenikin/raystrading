@@ -147,23 +147,7 @@ export const Products: CollectionConfig = {
         step: 1,
       },
       hooks: {
-        beforeValidate: [
-          ({ value }) => {
-            // Ensure the value is a number and not negative
-            if (typeof value === 'number' && value >= 0) {
-              return value
-            }
-            return 0
-          },
-        ],
-        afterRead: [
-          ({ value }) => {
-            if (typeof value === 'number') {
-              return formatIndianPrice(value)
-            }
-            return value
-          },
-        ],
+        beforeValidate: [({ value }) => (typeof value === 'number' && value >= 0 ? value : 0)],
       },
     },
     {

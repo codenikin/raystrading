@@ -49,7 +49,7 @@ export async function generateMetadata({
       description,
       url: `${process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3002'}/products/${Category}/${Subcategory}`,
 
-      siteName: 'Lovosis ,Technology L.L.C',
+      siteName: 'Rays Trading Hosur',
       locale: 'en_US',
       type: 'website',
       images: isImageObject
@@ -191,7 +191,7 @@ export default async function Product({ params }: { params: Promise<Args> }) {
       />
 
       <div className="pt-[80px] min-h-screen flex flex-col bg-white">
-        <div className="relative w-full h-[320px] md:h-[420px]">
+        <div className="relative w-full h-[320px] md:h-[620px]">
           <Image
             src="/images/bg.jpg"
             alt="Dahua Solutions Banner"
@@ -200,13 +200,13 @@ export default async function Product({ params }: { params: Promise<Args> }) {
             priority
           />
           <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/40">
-            <h1 className="text-white text-4xl md:text-5xl font-bold drop-shadow-lg">
-              <span className="text-white">Rays</span>
-              <span className="text-red-500"> Trading</span>
+            <h1 className="text-white p-8 md:p-0 mt-8 font-bold drop-shadow-lg animate-bounce">
+              <span className="text-white font-anton text-5xl md:text-7xl">RAYS</span>
+              <span className="text-red-500 font-anton text-5xl md:text-7xl"> TRADING HOSUR</span>
             </h1>
-            <p className="text-xl max-w-3xl text-white/90">
-              Looking for reliable batteries in Hosur & Bangalore? Rays Trading offers Exide, Amaron
-              & all major brands. Best prices, trusted service & fast delivery.
+            <p className="text-xl  text-white/90 p-8 md:pd-0">
+              Choose Tata Green batteries for eco-friendly performance and durability. Available at
+              Rays Trading, Hosur — ideal for cars, commercial vehicles, and solar applications.
             </p>
           </div>
         </div>

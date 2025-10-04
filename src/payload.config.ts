@@ -21,7 +21,6 @@ import { ContactPage } from './collections/ContactPage'
 import { Header } from './globals/Header/config'
 import { Forms } from './collections/Forms'
 import { FormSubmissions } from './collections/FormSubmissions'
-import { migrations } from './migrations'
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
