@@ -42,7 +42,6 @@ export default async function prodcuts() {
     collection: 'categories',
     depth: 1,
     limit: 12,
-
     overrideAccess: false,
   })
 

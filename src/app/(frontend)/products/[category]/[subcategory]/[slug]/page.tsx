@@ -111,9 +111,11 @@ export default async function Product({ params }: { params: Promise<Args> }) {
       : '/placeholder.jpg'
   return (
     <>
-      <Script id="product-schema-markup" type="application/ld+json" strategy="beforeInteractive">
-        {JSON.stringify(product.schemaMarkup)}
-      </Script>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(product.schemaMarkup) }}
+        key="product-schema-markup"
+      />
 
       <div className="pt-[80px] min-h-screen flex flex-col bg-white">
         <div className="relative w-full h-[320px] md:h-[620px]">

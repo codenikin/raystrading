@@ -8,7 +8,7 @@ export default async function AmronClient() {
 
   const amronCategory = (
     await payload.find({
-      collection: 'categories',
+      collection: 'subcategories',
       where: {
         slug: {
           equals: 'amaron',
@@ -22,7 +22,7 @@ export default async function AmronClient() {
         await payload.find({
           collection: 'products',
           where: {
-            categories: {
+            subcategories: {
               equals: amronCategory.id,
             },
           },
