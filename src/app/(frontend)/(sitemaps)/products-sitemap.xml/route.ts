@@ -56,7 +56,11 @@ const getPagesSitemap = async () => {
                       console.log('subCat.products?.docs:', subCat.products?.docs)
                       console.log('prod before fetch:', prod)
                       if (typeof prod === 'number') {
-                        prod = await payload.findByID({ collection: 'products', id: prod })
+                        prod = await payload.findByID({
+                          collection: 'products',
+                          id: prod,
+                          overrideAccess: true,
+                        })
                         console.log('prod after fetch:', prod)
                       }
                       if (!prod || typeof prod !== 'object' || !('slug' in prod)) return undefined
