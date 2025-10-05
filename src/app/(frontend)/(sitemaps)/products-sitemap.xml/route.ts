@@ -12,6 +12,7 @@ const getPagesSitemap = unstable_cache(
     const results = await payload.find({
       collection: 'categories',
       overrideAccess: false,
+      depth: 3,
       pagination: false,
     })
 
@@ -44,24 +45,34 @@ const getPagesSitemap = unstable_cache(
       : []
 
     const productSitemap = results.docs
-      ? results.docs
-          .filter((category) => Boolean(category?.slug))
-          .map((category) => {
-            return category.subcategories?.docs?.map((subCategory) => {
-              const subCat = subCategory as Subcategory
-              return subCat.products?.docs?.map((product) => {
-                const prod = product as Product
-                return {
-                  loc: `${SITE_URL}/products/${category?.slug}/${subCat.slug}/${prod.slug}`,
-                  lastmod: prod.updatedAt || dateFallback,
-                }
-              })
-            })
-          })
+      ? (
+          await Promise.all(
+            results.docs
+              .filter((category) => Boolean(category?.slug))
+              .map(async (category) => {
+                return await Promise.all(
+                  category.subcategories?.docs?.map(async (subCategory) => {
+                    const subCat = subCategory as Subcategory
+                    return await Promise.all(
+                      subCat.products?.docs?.map(async (product) => {
+                        let prod = product as Product | number
+                        if (typeof prod === 'number') {
+                          prod = await payload.findByID({ collection: 'products', id: prod })
+                        }
+                        if (!prod || typeof prod !== 'object' || !('slug' in prod)) return undefined
+                        return {
+                          loc: `${SITE_URL}/products/${category?.slug}/${subCat.slug}/${prod.slug}`,
+                          lastmod: prod.updatedAt || dateFallback,
+                        }
+                      }) || [],
+                    )
+                  }) || [],
+                )
+              }),
+          )
+        )
+          .flat(2)
           .filter((item) => item !== undefined)
-          .flat()
-          .filter((item) => item !== undefined)
-          .flat()
       : []
 
     return [...categorySitemap, ...subCategorySitemap, ...productSitemap]
