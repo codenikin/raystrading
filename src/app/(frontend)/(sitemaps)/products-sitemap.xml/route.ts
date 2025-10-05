@@ -12,8 +12,8 @@ const getPagesSitemap = unstable_cache(
     const results = await payload.find({
       collection: 'categories',
       overrideAccess: false,
-      depth: 3,
       pagination: false,
+      depth: 3,
     })
 
     const dateFallback = new Date().toISOString()
@@ -75,7 +75,25 @@ const getPagesSitemap = unstable_cache(
           .filter((item) => item !== undefined)
       : []
 
-    return [...categorySitemap, ...subCategorySitemap, ...productSitemap]
+    const sitemapArray = [...categorySitemap, ...subCategorySitemap, ...productSitemap]
+      .filter(Boolean)
+      .map((item) => {
+        let lastmod = item.lastmod
+        if (
+          lastmod &&
+          typeof lastmod === 'object' &&
+          Object.prototype.toString.call(lastmod) === '[object Date]'
+        ) {
+          lastmod = (lastmod as Date).toISOString()
+        } else if (typeof lastmod !== 'string') {
+          lastmod = dateFallback
+        }
+        return {
+          ...item,
+          lastmod,
+        }
+      })
+    return sitemapArray
   },
   ['pages-sitemap'],
   {
