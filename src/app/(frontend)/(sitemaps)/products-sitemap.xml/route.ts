@@ -3,10 +3,17 @@ import { getPayload } from 'payload'
 import config from '@payload-config'
 import { Product, Subcategory } from '@/payload-types'
 
-const getPagesSitemap = async () => {
+type SitemapItem = {
+  loc: string
+  lastmod?: string
+}
+
+const getPagesSitemap = async (): Promise<SitemapItem[]> => {
   const payload = await getPayload({ config })
   const SITE_URL = process.env.NEXT_PUBLIC_SERVER_URL || 'https://raystrading.com/'
+  const dateFallback = new Date().toISOString()
 
+  // Fetch all categories with nested subcategories and products
   const results = await payload.find({
     collection: 'categories',
     overrideAccess: true,
@@ -14,63 +21,74 @@ const getPagesSitemap = async () => {
     depth: 4,
   })
 
-  const dateFallback = new Date().toISOString()
-  const categorySitemap = results.docs
-    ? results.docs
-        .filter((category) => Boolean(category?.slug))
-        .map((category) => {
-          return {
-            loc: `${SITE_URL}/products/${category?.slug}`,
-            lastmod: category.updatedAt || dateFallback,
-          }
-        })
-    : []
+  if (!results.docs) return []
 
+  // Category URLs
+  const categorySitemap = results.docs
+    .filter((category) => Boolean(category?.slug))
+    .map((category) => ({
+      loc: `${SITE_URL}/products/${category.slug}`,
+      lastmod: category.updatedAt || dateFallback,
+    }))
+
+  // Subcategory URLs
   const subCategorySitemap = results.docs
     ? results.docs
         .filter((category) => Boolean(category?.slug))
         .map((category) => {
-          return category.subcategories?.docs?.map((subCategory) => {
-            const subCat = subCategory as Subcategory
+          const subCategories = Array.isArray(category.subcategories?.docs)
+            ? category.subcategories.docs.filter(
+                (subCat): subCat is Subcategory =>
+                  typeof subCat === 'object' && subCat !== null && 'slug' in subCat,
+              )
+            : []
+          return subCategories.map((subCat) => {
             return {
-              loc: `${SITE_URL}/products/${category?.slug}/${subCat.slug}`,
-              lastmod: category.updatedAt || dateFallback,
+              loc: `${SITE_URL}/products/${category.slug}/${subCat.slug}`,
+              lastmod: subCat.updatedAt || category.updatedAt || dateFallback,
             }
           })
         })
         .filter((item) => item !== undefined)
         .flat()
     : []
+
+  // Product URLs
   const productSitemap = results.docs
     ? (
         await Promise.all(
           results.docs
             .filter((category) => Boolean(category?.slug))
             .map(async (category) => {
-              return await Promise.all(
-                category.subcategories?.docs?.map(async (subCategory) => {
-                  const subCat = subCategory as Subcategory
-                  return await Promise.all(
-                    subCat.products?.docs?.map(async (product) => {
-                      let prod = product as Product | number
-                      console.log('subCat.products?.docs:', subCat.products?.docs)
-                      console.log('prod before fetch:', prod)
-                      if (typeof prod === 'number') {
-                        prod = await payload.findByID({
-                          collection: 'products',
-                          id: prod,
-                          overrideAccess: true,
-                        })
-                        console.log('prod after fetch:', prod)
-                      }
-                      if (!prod || typeof prod !== 'object' || !('slug' in prod)) return undefined
-                      return {
-                        loc: `${SITE_URL}/products/${category?.slug}/${subCat.slug}/${prod?.slug}`,
-                        lastmod: prod.updatedAt || dateFallback,
-                      }
-                    }) || [],
+              const subCategories = Array.isArray(category.subcategories?.docs)
+                ? category.subcategories.docs.filter(
+                    (subCat): subCat is Subcategory =>
+                      typeof subCat === 'object' && subCat !== null && 'slug' in subCat,
                   )
-                }) || [],
+                : []
+              return await Promise.all(
+                subCategories.map(async (subCat) => {
+                  if (!subCat.products?.docs) return []
+                  return await Promise.all(
+                    subCat.products.docs.map(async (product) => {
+                      let prod = product as Product | number | string
+                      if (typeof prod === 'number' || typeof prod === 'string') {
+                        prod = await payload.findByID({ collection: 'products', id: prod })
+                      }
+                      if (typeof prod === 'object' && prod !== null && 'slug' in prod) {
+                        return {
+                          loc: `${SITE_URL}/products/${category.slug}/${subCat.slug}/${prod.slug}`,
+                          lastmod:
+                            prod.updatedAt ||
+                            subCat.updatedAt ||
+                            category.updatedAt ||
+                            dateFallback,
+                        }
+                      }
+                      return undefined
+                    }),
+                  )
+                }),
               )
             }),
         )
@@ -79,29 +97,17 @@ const getPagesSitemap = async () => {
         .filter((item) => item !== undefined)
     : []
 
-  const sitemapArray = [...categorySitemap, ...subCategorySitemap, ...productSitemap]
-    .filter(Boolean)
-    .map((item) => {
-      let lastmod = item.lastmod
-      if (
-        lastmod &&
-        typeof lastmod === 'object' &&
-        Object.prototype.toString.call(lastmod) === '[object Date]'
-      ) {
-        lastmod = (lastmod as Date).toISOString()
-      } else if (typeof lastmod !== 'string') {
-        lastmod = dateFallback
-      }
-      return {
-        ...item,
-        lastmod,
-      }
-    })
-  return sitemapArray
+  // Combine all sitemaps
+  return [...categorySitemap, ...subCategorySitemap, ...productSitemap].map((item) => ({
+    ...item,
+    lastmod:
+      typeof item.lastmod === 'string' && !isNaN(Date.parse(item.lastmod))
+        ? new Date(item.lastmod).toISOString()
+        : item.lastmod || dateFallback,
+  }))
 }
 
 export async function GET() {
   const sitemap = await getPagesSitemap()
-
   return getServerSideSitemap(sitemap)
 }
