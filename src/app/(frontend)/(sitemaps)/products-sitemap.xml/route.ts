@@ -1,7 +1,6 @@
 import { getServerSideSitemap } from 'next-sitemap'
 import { getPayload } from 'payload'
 import config from '@payload-config'
-import { unstable_cache } from 'next/cache'
 import { Product, Subcategory } from '@/payload-types'
 
 const getPagesSitemap = async () => {
@@ -58,6 +57,7 @@ const getPagesSitemap = async () => {
                       if (typeof prod === 'number') {
                         prod = await payload.findByID({ collection: 'products', id: prod })
                       }
+                      console.log(prod.slug)
                       // if (!prod || typeof prod !== 'object' || !('slug' in prod)) return undefined
                       return {
                         loc: `${SITE_URL}/products/${category?.slug}/${subCat.slug}/${prod?.slug}`,
@@ -94,11 +94,6 @@ const getPagesSitemap = async () => {
     })
   return sitemapArray
 }
-//   ['pages-sitemap'],
-//   {
-//     tags: ['pages-sitemap'],
-//   },
-// )
 
 export async function GET() {
   const sitemap = await getPagesSitemap()
