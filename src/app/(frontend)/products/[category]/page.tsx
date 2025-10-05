@@ -5,7 +5,6 @@ import type { Category, Product, Subcategory } from '@/payload-types'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Metadata } from 'next'
-import { s } from 'node_modules/framer-motion/dist/types.d-Cjd591yU'
 
 type Media = {
   url: string
