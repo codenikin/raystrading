@@ -24,7 +24,7 @@ export async function generateMetadata({
   const categoryDoc = await payload
     .find({
       collection: 'categories',
-      where: { slug: { equals: Subcategory } },
+      where: { slug: { equals: Category } },
       limit: 1,
       pagination: false,
     })
@@ -77,6 +77,15 @@ export default async function Product({ params }: { params: Promise<Args> }) {
   const { isEnabled: draft } = await draftMode()
   const { subcategory, category } = await params
   const payload = await getPayload({ config: configPromise })
+  const categoryDoc = await payload
+    .find({
+      collection: 'categories',
+      where: { slug: { equals: category } },
+      limit: 1,
+      depth: 3,
+      pagination: false,
+    })
+    .then((res) => res.docs?.[0])
   const subcategoryResult = await payload.find({
     collection: 'subcategories',
     draft,
@@ -117,6 +126,9 @@ export default async function Product({ params }: { params: Promise<Args> }) {
       subcategories: {
         equals: subcategoryId,
       },
+      categories: {
+        equals: categoryDoc.id,
+      },
     },
   })
 
@@ -137,7 +149,7 @@ export default async function Product({ params }: { params: Promise<Args> }) {
       url: `${baseUrl}/products/${category}/${subcategory}/${product.slug}`,
       offers: {
         '@type': 'Offer',
-        priceCurrency: 'USD',
+        priceCurrency: 'INR',
         price: product.pricep ? String(product.pricep) : '0.00',
         availability: 'https://schema.org/InStock',
       },
