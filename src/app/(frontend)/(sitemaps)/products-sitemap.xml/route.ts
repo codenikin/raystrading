@@ -9,7 +9,7 @@ const getPagesSitemap = async () => {
 
   const results = await payload.find({
     collection: 'categories',
-    overrideAccess: false,
+    overrideAccess: true,
     pagination: false,
     depth: 4,
   })
@@ -53,12 +53,13 @@ const getPagesSitemap = async () => {
                   return await Promise.all(
                     subCat.products?.docs?.map(async (product) => {
                       let prod = product as Product | number
-
+                      console.log('subCat.products?.docs:', subCat.products?.docs)
+                      console.log('prod before fetch:', prod)
                       if (typeof prod === 'number') {
                         prod = await payload.findByID({ collection: 'products', id: prod })
+                        console.log('prod after fetch:', prod)
                       }
-                      console.log(prod.slug)
-                      // if (!prod || typeof prod !== 'object' || !('slug' in prod)) return undefined
+                      if (!prod || typeof prod !== 'object' || !('slug' in prod)) return undefined
                       return {
                         loc: `${SITE_URL}/products/${category?.slug}/${subCat.slug}/${prod?.slug}`,
                         lastmod: prod.updatedAt || dateFallback,
