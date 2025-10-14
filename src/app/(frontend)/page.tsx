@@ -11,6 +11,7 @@ import SlidingTextBackground from '@/components/slidetext'
 import BrandSlider from '@/components/BrandSlider/BrandSlider'
 import TestimonialSlider from '@/components/Testimonials/testimonial-slider'
 import configPromise from '@/payload.config' // Add this line to import configPromise
+import PopupModal from '@/components/PopupModal/popup-modal'
 export const dynamic = 'force-dynamic'
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -106,6 +107,11 @@ export default async function HomePage() {
   ).docs
   return (
     <>
+      <PopupModal
+        imageUrl="/images/google.jpg"
+        altText="Welcome to Our Store"
+        autoShowDelay={1000}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

@@ -1,5 +1,5 @@
 import React from 'react'
-import './global.css'
+import '@/app/(frontend)/global.css'
 import { Header } from '@/Header/Component'
 import { Media } from '@/payload-types'
 import { getPayload } from '@/lib/payload'
