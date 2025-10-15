@@ -66,9 +66,11 @@ export default function PopupModal({
             <Home className="text-red-600 mt-1" />
 
             <p>
-              Rays Trading(Exide care) Srinagar - Kanyakumari Hwy, Surya Nagar, Sri Nagar, Hosur,{' '}
+              Rays Trading(Exide care) #66/3,Railway station Road,
               <br />
-              Tamil Nadu 635109 India
+              Shanthi Nagar West,Near Murugan Temple,Opp. Singaravelan Bakery
+              <br />
+              Hosur-635109,Tamil Nadu
             </p>
           </div>
 
@@ -131,17 +133,6 @@ export default function PopupModal({
             </div>
           </div>
         </div>
-        {/* <Image
-            src={imageUrl}
-            alt={altText}
-            fill
-            priority
-            sizes="(max-width: 640px) 90vw, (max-width: 768px) 70vw, 800px"
-            className="rounded-lg object-contain"
-            onError={(e) => {
-              console.error('Error loading image:', imageUrl)
-            }}
-          /> */}
       </div>
     </div>
   )
