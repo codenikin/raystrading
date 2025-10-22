@@ -34,30 +34,27 @@ export default function PopupModal({
   if (!isOpen) return null
 
   return (
-    <div className="fixed inset-0 z-[60] flex items-center justify-center overflow-y-auto overflow-x-hidden bg-black bg-opacity-50 p-3">
-      <div className="relative w-full max-h-[90vh] overflow-y-auto rounded-xl bg-white p-4 sm:w-[90%] md:w-[600px]">
-        {/* Close button - Fixed position */}
-        <div className="sticky top-0 right-0 z-[70] flex justify-end">
-          <button
-            onClick={handleClose}
-            className="flex h-12 w-12 items-center justify-center rounded-full bg-red-500 text-white shadow-xl transition-all hover:bg-red-600 active:scale-95"
-            aria-label="Close popup"
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4">
+      <div className="relative max-w-2xl rounded-lg bg-white p-4 sm:max-w-xl md:max-w-2xl">
+        <button
+          onClick={handleClose}
+          className="absolute -right-3 -top-3 z-50 flex h-10 w-10 items-center justify-center rounded-full bg-red-500 text-white shadow-xl transition-transform hover:scale-110 hover:bg-red-600 active:scale-95 md:-right-5 md:-top-5"
+          aria-label="Close popup"
+        >
+          <svg
+            className="h-6 w-6"
+            fill="none"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2.5"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
           >
-            <svg
-              className="h-8 w-8"
-              fill="none"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2.5"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path d="M6 18L18 6M6 6l12 12"></path>
-            </svg>
-          </button>
-        </div>
+            <path d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
 
-        <div className="mt-2 w-full rounded-xl bg-white  ">
+        <div className="max-w-lg mx-auto bg-white rounded-2xl shadow p-6 space-y-4">
           <h2 className="text-center text-2xl font-semibold mb-2">
             CONTACT <span className="text-red-600">US</span>
           </h2>
@@ -111,27 +108,27 @@ export default function PopupModal({
             <img
               src="/images/raysqr2.png"
               alt="QR Code"
-              className="mx-auto w-36 h-36 sm:w-48 sm:h-48 object-contain"
+              className="mx-auto w-48 h-48 object-contain"
             />
-            <p className="mt-3 text-sm px-2">
+            <p className="mt-3 text-sm">
               Tell us about your experience. <br />
               Scan this QR code to discover more with us.
             </p>
 
-            <div className="bg-white border-t flex justify-around py-4 mt-4">
+            <div className=" bg-white border-t  flex justify-around py-3">
               <a
                 href="tel:+919442532024"
-                className="text-green-600 font-semibold flex items-center gap-2 hover:scale-105 transition-transform"
+                className="text-green-600 font-semibold flex items-center gap-2"
               >
-                <Phone size={20} /> Call
+                <Phone size={18} /> Call
               </a>
               <a
                 href="https://maps.app.goo.gl/VzM5xL3Z53X5Pzom8"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-blue-600 font-semibold flex items-center gap-2 hover:scale-105 transition-transform"
+                className="text-blue-600 font-semibold flex items-center gap-2"
               >
-                <Globe size={20} /> Get Directions
+                <Globe size={18} /> Get Directions
               </a>
             </div>
           </div>

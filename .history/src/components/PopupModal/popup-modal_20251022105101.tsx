@@ -57,7 +57,7 @@ export default function PopupModal({
           </button>
         </div>
 
-        <div className="mt-2 w-full rounded-xl bg-white  ">
+        <div className="mt-2 w-full rounded-xl bg-white shadow-sm space-y-4">
           <h2 className="text-center text-2xl font-semibold mb-2">
             CONTACT <span className="text-red-600">US</span>
           </h2>

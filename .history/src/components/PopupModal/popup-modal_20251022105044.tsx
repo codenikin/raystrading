@@ -57,7 +57,7 @@ export default function PopupModal({
           </button>
         </div>
 
-        <div className="mt-2 w-full rounded-xl bg-white  ">
+        <div className="mt-2 w-full rounded-xl bg-white shadow-sm space-y-4">
           <h2 className="text-center text-2xl font-semibold mb-2">
             CONTACT <span className="text-red-600">US</span>
           </h2>
@@ -111,27 +111,27 @@ export default function PopupModal({
             <img
               src="/images/raysqr2.png"
               alt="QR Code"
-              className="mx-auto w-36 h-36 sm:w-48 sm:h-48 object-contain"
+              className="mx-auto w-48 h-48 object-contain"
             />
-            <p className="mt-3 text-sm px-2">
+            <p className="mt-3 text-sm">
               Tell us about your experience. <br />
               Scan this QR code to discover more with us.
             </p>
 
-            <div className="bg-white border-t flex justify-around py-4 mt-4">
+            <div className=" bg-white border-t  flex justify-around py-3">
               <a
                 href="tel:+919442532024"
-                className="text-green-600 font-semibold flex items-center gap-2 hover:scale-105 transition-transform"
+                className="text-green-600 font-semibold flex items-center gap-2"
               >
-                <Phone size={20} /> Call
+                <Phone size={18} /> Call
               </a>
               <a
                 href="https://maps.app.goo.gl/VzM5xL3Z53X5Pzom8"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-blue-600 font-semibold flex items-center gap-2 hover:scale-105 transition-transform"
+                className="text-blue-600 font-semibold flex items-center gap-2"
               >
-                <Globe size={20} /> Get Directions
+                <Globe size={18} /> Get Directions
               </a>
             </div>
           </div>
